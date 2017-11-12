@@ -52,7 +52,7 @@
             <h1 class="mt-4">Мои товары</h1>
             <hr>
             <button type="button" class="btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">
-                Добавить объявление
+                Новое объявление
             </button>
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">

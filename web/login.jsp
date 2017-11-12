@@ -23,7 +23,7 @@
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
                 <li class="nav-item">
-                    <a class="nav-link" href="main-goods.jsp">Все товары
+                    <a class="nav-link" href="allgoods">Все товары
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>

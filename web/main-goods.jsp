@@ -23,13 +23,22 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+                <%
+                    Users u = (Users) request.getSession().getAttribute("login");
+                    if (u==null){
+                %>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Все товары
+                    <a class="nav-link text-warning" href="loginuser">Новое объявление
+                        <span class="sr-only">(current)</span>
+                    </a>
+                </li>
+                <% } %>
+                <li class="nav-item active">
+                    <a class="nav-link" href="allgoods">Все товары
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <%
-                    Users u = (Users) request.getSession().getAttribute("login");
                     if (null != request.getSession().getAttribute("login")) {
                 %>
                 <li class="nav-item ">
@@ -83,8 +92,6 @@
                 out.print("<p class=\"no-published\">Объявление: не опубликовано</p>");
             }
             %>
-
-
             <p>Рубрика:
                 <%
                     switch (g.getCategory()) {
@@ -139,21 +146,17 @@
                     }
                 %>
             </p>
-
-            <p>Автор: <% out.print(u.getName());%>  <% %></p>
-
+            <%--<p>Автор: <% out.print(u.getName());%>  <% %></p>--%>
             <p>Номер товара # <% out.print(g.getId()); %></p>
-
-
-
-
             <p class="viewCoutMain">Количество просмотров: <% out.print(g.getView_count()); %></p>
             <p>Дата создания: <% out.print(g.getDate()); %> <% out.print(g.getTime()); %></p>
-
             <p>Стоимость: <% out.print(g.getPrice()); %></p>
             <p>Описание товара: <% out.print(g.getDescription()); %></p>
             <p>Фотография: <% out.print(g.getPhoto()); %></p>
             <%
+
+                if(u!=null){
+
                 if (u.getId() == g.getId_user()) {
             %>
             <div class="form-inline">
@@ -167,6 +170,7 @@
                 </form>
             </div>
             <%
+                }
                 }
             %>
             <hr>
