@@ -35,7 +35,7 @@
                     <a class="nav-link" href="mygoods">Мои товары</a>
                 </li>
                 <li class="nav-item active">
-                    <a class="nav-link" href="#">Настройки</a>
+                    <a class="nav-link" href="options.jsp">Настройки</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout">Выход</a>
@@ -56,20 +56,19 @@
                 if (null != request.getSession().getAttribute("login")) {
                     Users x = (Users) request.getSession().getAttribute("login");
             %>
-            <form action="updateuser" method="post">
-                <input class="form-control" type="text" name="email" value="<% out.print(x.getEmail()); %>">
-                <input class="form-control" type="text" name="password"
+            <form action="updatepasswordbyid" method="post">
+                <p>Email: <% out.print(x.getEmail()); %></p>
+                <p>Ваше Ф.И: <% out.print(x.getName()); %> <% out.print(x.getSurname()); %></p>
+                <p>Возраст: <% out.print(x.getAge()); %></p>
+                <p>Ваш пароль: </p> <input class="form-control" type="text" name="pass"
                        value="<% out.print(x.getPassword()); %>">
-                <input class="form-control" type="text" name="name" value="<% out.print(x.getName()); %>">
-                <input class="form-control" type="text" name="surname"
-                       value="<% out.print(x.getSurname()); %>">
-                <input class="form-control" type="text" name="age" value="<% out.print(x.getAge()); %>">
                 <input type="hidden" name="idUser" value="<% out.print(x.getId()); %>">
+                <br>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
-                <a href="pages">
-                    <button class="btn btn-danger">Отмена</button>
-                </a>
+                <a href="mygoods"><button type="button" class="btn btn-danger">Отмена</button></a>
             </form>
+
+
             <%
             }
             else {

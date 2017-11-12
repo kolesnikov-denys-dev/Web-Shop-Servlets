@@ -42,7 +42,7 @@
                     <a class="nav-link" href="mygoods">Мои товары</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Настройки</a>
+                    <a class="nav-link" href="options.jsp">Настройки</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="logout">Выход</a>

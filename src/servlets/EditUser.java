@@ -30,7 +30,7 @@ public class EditUser extends HttpServlet {
             Users x = dbUtil.getUserById(id);
             request.setAttribute("userById", x);
             request.getRequestDispatcher("/edit.jsp").forward(request, response);
-            response.sendRedirect("/edituser");
+//            response.sendRedirect("/edituser");
         }
         else {
             response.sendRedirect("pages");

@@ -1,6 +1,11 @@
 .form-control {
-    width: 240px;
-    margin: 4px;
+     width: 240px;
+     margin: 4px;
+ }
+
+
+.btn-new {
+    margin-top: 13px;
 }
 
 .published {
@@ -24,6 +29,10 @@
 }
 
 
+
+.areaDesc{
+    width: 100%;
+}
 
 
 

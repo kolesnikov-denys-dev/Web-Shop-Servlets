@@ -25,11 +25,23 @@ public class UpdateUser extends HttpServlet {
         System.out.println(idUser);
 
         String email = request.getParameter("email");
+
         String password = request.getParameter("password");
         String name = request.getParameter("name");
         String surname = request.getParameter("surname");
         int age = Integer.parseInt(request.getParameter("age"));
 
+
+        System.out.println(email+ "---------------");
+        System.out.println(name+ "---------------");
+        System.out.println(surname+ "---------------");
+        System.out.println(age+ "---------------");
+
+
+//
+//        if (email==null && name==null && surname==null && age==null){
+//
+//        }
         dbUtil.updateUser(email, password, name, surname, age, idUser);
         response.sendRedirect("pages");
     }

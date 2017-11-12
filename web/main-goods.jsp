@@ -39,6 +39,7 @@
                     </a>
                 </li>
                 <%
+
                     if (null != request.getSession().getAttribute("login")) {
                 %>
                 <li class="nav-item ">

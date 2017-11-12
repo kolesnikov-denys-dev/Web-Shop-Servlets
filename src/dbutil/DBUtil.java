@@ -185,8 +185,8 @@ public class DBUtil {
     public ArrayList<Goods> getGoodsByParam(String search, String category) {
         ArrayList<Goods> goodsList = new ArrayList<Goods>();
         Goods goods = null;
-        if (category==null) category="0";
-        if (search==null) search="";
+        if (category == null) category = "0";
+        if (search == null) search = "";
         try {
             Statement statement = connection.createStatement();
             String queryAll = "SELECT * FROM goods";
@@ -221,5 +221,19 @@ public class DBUtil {
             e.printStackTrace();
         }
         return goodsList;
+    }
+
+
+    public void updatePassword(String id, String password) {
+
+        System.out.println(id+ " --------------id");
+        System.out.println(password+ " --------------pas");
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate("UPDATE users SET  password=\"" + password+ "\" WHERE id=\"" + id + "\"");
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
 }
