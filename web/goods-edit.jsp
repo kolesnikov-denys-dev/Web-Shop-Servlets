@@ -51,15 +51,48 @@
         </div>
     </div>
 </nav>
+
+
 <div class="container">
     <div class="row">
+
+
+
+
+
         <div class="col-lg-8 offset-2">
+
+
+
+            <%--jfglkfjdgklfdjglkfsdjgkldfsjglksjdfglkjsdflkg--%>
+
+
+
+
+            <%--sdfgdfsgfdgfd  <%--jfglkfjdgklfdjglkfsdjgkldfsjglksjdfglkjsdflkg--%>
+            <%--sdfgdfsgfdgfd--%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             <h1 class="mt-4">Редактировать объявление</h1>
             <hr>
             <%
                 Goods yourGoods = (Goods) request.getAttribute("yourGoods");
             %>
             <form action="edit-goods" method="post">
+
+
                 <p>Дата публикации: <% out.print(yourGoods.getTime()); %>
                     <% out.print(yourGoods.getDate()); %></p>
                 Статус объявления:

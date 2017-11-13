@@ -34,6 +34,5 @@ public class MyGoods extends HttpServlet {
         }
         request.setAttribute("MyList", MyGoodsList);
         request.getRequestDispatcher("/goods.jsp").forward(request, response);
-        System.out.println(u);
     }
 }

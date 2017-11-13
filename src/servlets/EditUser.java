@@ -25,12 +25,10 @@ public class EditUser extends HttpServlet {
 
         if (request.getSession()!=null && request.getSession().getAttribute("login")!=null) {
             String idUser = request.getParameter("idUser");
-            System.out.println(idUser);
             int id = Integer.parseInt(idUser);
             Users x = dbUtil.getUserById(id);
             request.setAttribute("userById", x);
             request.getRequestDispatcher("/edit.jsp").forward(request, response);
-//            response.sendRedirect("/edituser");
         }
         else {
             response.sendRedirect("pages");

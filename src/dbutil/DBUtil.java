@@ -26,7 +26,7 @@ public class DBUtil {
     public void addUser(String email, String password, String name, String surname, int age) {
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate("INSERT INTO users (email, password, name, surname, age) " +
+            st.executeUpdate("INSERT INTO users (email, sha1(password), name, surname, age) " +
                     "VALUES (\"" + email + "\",\"" + password + "\",\"" + name + "\",\"" + surname + "\"," + age + ")");
             st.close();
         } catch (Exception e) {
@@ -79,7 +79,7 @@ public class DBUtil {
     public void updateUser(String email, String password, String name, String surname, int age, String id) {
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate("UPDATE users SET  email=\"" + email + "\", password=\"" + password + "\",name=\"" + name + "\",surname=\"" + surname + "\",age=" + age + "  WHERE id = \"" + id + "\"");
+            st.executeUpdate("UPDATE users SET  email=\"" + email + "\", password=SHA1(\"" + password + "\"),name=\"" + name + "\",surname=\"" + surname + "\",age=" + age + "  WHERE id = \"" + id + "\"");
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -87,14 +87,26 @@ public class DBUtil {
     }
 
     public Users getUserByEmailAndPassword(String email, String password) {
-        Users userEmpty = null;
-        for (Users y : listUsers()) {
-            if (y.getEmail().equals(email) && y.getPassword().equals(password)) {
-                userEmpty = y;
+        Users u = null;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery("SELECT id, email, password, name, surname, age FROM users WHERE email=\"" + email + "\"  AND password=SHA1(\"" + password + "\") LIMIT 1");
+            if (result.next()) {
+                int id = result.getInt("id");
+                String emailUser = result.getString("email");
+                String passwordUser = result.getString("password");
+                String name = result.getString("name");
+                String surname = result.getString("surname");
+                int age = result.getInt("age");
+                u = new Users(id, emailUser, passwordUser, name, surname, age);
             }
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
         }
-        return userEmpty;
+        return u;
     }
+
 
     public ArrayList<Goods> showMyGoods(Users u) {
         int get_id_user = u.getId();
@@ -223,14 +235,10 @@ public class DBUtil {
         return goodsList;
     }
 
-
     public void updatePassword(String id, String password) {
-
-        System.out.println(id+ " --------------id");
-        System.out.println(password+ " --------------pas");
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate("UPDATE users SET  password=\"" + password+ "\" WHERE id=\"" + id + "\"");
+            st.executeUpdate("UPDATE users SET  password=SHA1(\"" + password + "\") WHERE id=\"" + id + "\"");
             st.close();
         } catch (Exception e) {
             e.printStackTrace();

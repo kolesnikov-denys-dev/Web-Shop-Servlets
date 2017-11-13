@@ -23,7 +23,6 @@ public class DeleteUser extends HttpServlet {
 
         if (request.getSession() != null && request.getSession().getAttribute("login") != null) {
             String idUser = request.getParameter("idUser");
-            System.out.println(idUser);
             if (idUser != null) {
                 dbUtil.deleteUser(idUser);
                 response.sendRedirect("pages");

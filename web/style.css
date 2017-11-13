@@ -3,7 +3,6 @@
      margin: 4px;
  }
 
-
 .btn-new {
     margin-top: 13px;
 }
@@ -11,13 +10,18 @@
 .published {
     font-weight: 500;
     color: green;
-
 }
 
 .no-published {
     color: orangered;
     font-weight: 500;
 
+}
+
+
+.a:hover {
+    color: #0056b3;
+    text-decoration: none !important;
 }
 
 .editBtn{
@@ -27,8 +31,6 @@
 .viewCout {
     margin-left:20px;
 }
-
-
 
 .areaDesc{
     width: 100%;

@@ -20,6 +20,19 @@
                 <hr>
                 <h3>Edit User</h3>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
                 <form action="filedownload" method="post" enctype="multipart/form-data">
                     <input type="file" name="file">
                     <button type="submit" class="btn btn-success">Upload</button>

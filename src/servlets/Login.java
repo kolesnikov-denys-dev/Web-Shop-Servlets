@@ -28,6 +28,7 @@ public class Login extends HttpServlet {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Users checkedUser = dbUtil.getUserByEmailAndPassword(email, password);
+
         if (checkedUser != null && request.getSession() != null) {
 //            HttpSession session = request.getSession();   //long way
 //            session.setAttribute("login", checkedUser);

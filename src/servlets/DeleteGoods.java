@@ -22,7 +22,6 @@ public class DeleteGoods extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession() != null && request.getSession().getAttribute("login") != null) {
             String idGood = request.getParameter("idgoods");
-            System.out.println(idGood);
             if (idGood != null) {
                 dbUtil.deleteGoodsById(idGood);
                 response.sendRedirect("mygoods");
