@@ -148,7 +148,8 @@
                 out.print("<p class=\"no-published\">Объявление: не опубликовано</p>");
             }
             %>
-            <p>Дата создания: <% out.print(g.getDate()); %> <% out.print(g.getTime()); %></p>
+            <p>Дата создания: <% out.print(g.getDate()); %></p>
+            <p>Время создания: <% out.print(g.getTime()); %></p>
             <p>Номер товара # <% out.print(g.getId()); %></p>
             <p>Стоимость: <% out.print(g.getPrice()); %></p>
             <p>Описание товара: <% out.print(g.getDescription()); %></p>

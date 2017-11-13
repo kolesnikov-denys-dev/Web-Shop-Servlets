@@ -25,9 +25,7 @@ public class AllGoods extends HttpServlet {
         ArrayList<Goods> AllGoodsLi = null;
         String search = request.getParameter("search");
         String category = request.getParameter("category");
-
         AllGoodsLi = dbUtil.getGoodsByParam(search, category);
-
         request.setAttribute("AllGo", AllGoodsLi);
         request.getRequestDispatcher("/main-goods.jsp").forward(request, response);
     }

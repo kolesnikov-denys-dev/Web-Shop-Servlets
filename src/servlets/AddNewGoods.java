@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.xml.crypto.Data;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 @WebServlet("/addnewgoods")
@@ -27,7 +28,7 @@ public class AddNewGoods extends HttpServlet {
 
         if (request.getSession() != null && request.getSession().getAttribute("login") != null) {
 
-            Date date = new Date();
+            request.setCharacterEncoding("UTF8");
 
             Users u = (Users) request.getSession().getAttribute("login");
             int idUser = u.getId();
@@ -39,16 +40,22 @@ public class AddNewGoods extends HttpServlet {
             else {
                 active = 0;
             }
-            String currentDateAndTime = date.toString();
-            String currentTime = currentDateAndTime.substring(11, 18);
-            String currentDate = currentDateAndTime.substring(0, 10);
+
+            Date date = new Date();
+            SimpleDateFormat dateFormat = null;
+
+            dateFormat = new SimpleDateFormat("HH:mm:ss");
+            String currentTimeS = dateFormat.format(date);
+            dateFormat = new SimpleDateFormat("dd MMMM y");
+            String currentDateS = dateFormat.format(date);
+
             int price = Integer.parseInt(request.getParameter("price"));
             String description = request.getParameter("description");
             String photo = ("photo");
             String title = request.getParameter("title");
             int category = Integer.parseInt(request.getParameter("category"));
 
-            Goods goods = new Goods(idUser, active, currentDate, currentTime, price, description, photo, title, category );
+            Goods goods = new Goods(idUser, active, currentDateS, currentTimeS, price, description, photo, title, category );
 
             dbUtil.addNewGoods(goods);
 
@@ -58,4 +65,8 @@ public class AddNewGoods extends HttpServlet {
         }
 
     }
+
+
+
+
 }

@@ -26,6 +26,8 @@ public class MyGoods extends HttpServlet {
         ArrayList<Goods> MyGoodsList = null;
         if (u != null) {
             MyGoodsList = dbUtil.showMyGoods(u);
+
+
         }
         request.setAttribute("MyList", MyGoodsList);
         request.getRequestDispatcher("/goods.jsp").forward(request, response);

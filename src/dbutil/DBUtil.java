@@ -5,6 +5,7 @@ import entities.Users;
 
 import java.awt.*;
 import java.sql.*;
+import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -114,7 +115,7 @@ public class DBUtil {
         ArrayList<Goods> listGoods = new ArrayList<Goods>();
         try {
             PreparedStatement preparedStatement = null;
-            preparedStatement = connection.prepareStatement("SELECT * FROM goods WHERE id_user = ?");
+            preparedStatement = connection.prepareStatement("SELECT * FROM goods WHERE id_user = ? ORDER BY id DESC ");
             preparedStatement.setInt(1, get_id_user);
             ResultSet result = preparedStatement.executeQuery();
             while (result.next()) {
@@ -294,4 +295,15 @@ public class DBUtil {
             e.printStackTrace();
         }
     }
+
+    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols(){
+
+        @Override
+        public String[] getMonths() {
+            return new String[]{"января", "февраля", "марта", "апреля", "мая", "июня",
+                    "июля", "августа", "сентября", "октября", "ноября", "декабря"};
+        }
+
+    };
+
 }
