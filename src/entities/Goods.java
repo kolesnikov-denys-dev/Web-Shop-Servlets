@@ -28,6 +28,19 @@ public class Goods {
         this.category = category;
     }
 
+    public Goods(int id_user, int published, String date, String time, int price, String description, String photo, String title, int category) {
+        this.id_user = id_user;
+        this.published = published;
+        this.date = date;
+        this.time = time;
+        this.price = price;
+        this.description = description;
+        this.photo = photo;
+        this.title = title;
+        this.category = category;
+    }
+
+
     public int getId() {
         return id;
     }

@@ -14,7 +14,6 @@ import java.util.List;
 
 @WebServlet("/pages")
 public class Pages extends HttpServlet {
-
     private DBUtil dbUtil;
 
     public Pages() {
@@ -27,7 +26,7 @@ public class Pages extends HttpServlet {
             ArrayList<Users> usersList = (ArrayList<Users>) dbUtil.listUsers();
             request.setAttribute("users", usersList);
             request.getRequestDispatcher("/index.jsp").forward(request, response);
-        }else{
+        } else {
             response.sendRedirect("/login.jsp");
         }
     }

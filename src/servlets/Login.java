@@ -12,7 +12,6 @@ import java.io.IOException;
 
 @WebServlet("/loginuser")
 public class Login extends HttpServlet {
-
     DBUtil dbUtil;
 
     public Login() {
@@ -20,18 +19,11 @@ public class Login extends HttpServlet {
         dbUtil = new DBUtil();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         Users checkedUser = dbUtil.getUserByEmailAndPassword(email, password);
-
-        if (checkedUser != null && request.getSession() != null) {
-//            HttpSession session = request.getSession();   //long way
-//            session.setAttribute("login", checkedUser);
+        if (checkedUser != null) {
             request.getSession().setAttribute("login", checkedUser);
             response.sendRedirect("allgoods");
         } else {
@@ -39,3 +31,6 @@ public class Login extends HttpServlet {
         }
     }
 }
+
+//            HttpSession session = request.getSession();   //long way
+//            session.setAttribute("login", checkedUser);

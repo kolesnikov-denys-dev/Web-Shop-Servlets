@@ -1,7 +1,11 @@
-.form-control {
+.set-size {
      width: 240px;
-     margin: 4px;
- }
+    padding: 5px;
+}
+
+.search-form {
+    margin: 10px 0;
+}
 
 .btn-new {
     margin-top: 13px;
@@ -15,9 +19,7 @@
 .no-published {
     color: orangered;
     font-weight: 500;
-
 }
-
 
 .a:hover {
     color: #0056b3;

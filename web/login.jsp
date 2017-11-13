@@ -15,7 +15,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Барахолка</a>
+        <a class="navbar-brand" href="allgoods">Барахолка</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -55,9 +55,9 @@
                 <hr>
                 <h2 align="center">Вход</h2>
                 <form action="loginuser" method="get">
-                    <input class="form-control" type="email" name="email" placeholder="Емейл" autofocus>
-                    <input class="form-control" type="password" name="password" placeholder="Пароль">
-                    <br>
+                    <input class="form-control set-size m-2" type="email" name="email" placeholder="Емейл" autofocus>
+
+                    <input class="form-control set-size m-2" type="password" name="password" placeholder="Пароль">
                     <button type="submit" class="btn btn-success">Вход</button>
                     <a href="/registration.jsp">
                         <button type="button" class="btn btn-primary">Регистрация</button>

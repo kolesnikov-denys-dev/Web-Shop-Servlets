@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @WebServlet("/updateuser")
 public class UpdateUser extends HttpServlet {
-
     DBUtil dbUtil;
 
     public UpdateUser() {
@@ -30,9 +29,5 @@ public class UpdateUser extends HttpServlet {
 
         dbUtil.updateUser(email, password, name, surname, age, idUser);
         response.sendRedirect("pages");
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

@@ -23,15 +23,10 @@ public class EditGoods extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String id_goods = request.getParameter("idgoods");
-
-        Goods g =  dbUtil.getGoodsById(id_goods);
+        Goods g = dbUtil.getGoodsById(id_goods);
 
         request.setAttribute("yourGoods", g);
-        request.getRequestDispatcher("/goods-edit.jsp").forward(request,response);
-
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        request.getRequestDispatcher("/goods-edit.jsp").forward(request, response);
 
     }
 }

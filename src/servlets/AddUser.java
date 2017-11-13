@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @WebServlet("/addUser")
 public class AddUser extends HttpServlet {
-
     private DBUtil dbutil;
 
     public AddUser() {
@@ -29,7 +28,7 @@ public class AddUser extends HttpServlet {
 
         boolean exist = dbutil.emailAlreadyExist(email);
 
-        if (exist){
+        if (exist) {
             request.setAttribute("lastEmail", email);
             request.setAttribute("lastName", name);
             request.setAttribute("lastSur", surname);

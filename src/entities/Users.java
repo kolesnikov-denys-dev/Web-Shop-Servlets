@@ -8,6 +8,10 @@ public class Users  {
     private String surname;
     private int age;
 
+    public Users(String password) {
+        this.password = password;
+    }
+
     public Users(int id, String email, String password, String name, String surname, int age) {
         this.id = id;
         this.email = email;

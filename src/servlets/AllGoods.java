@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 @WebServlet("/allgoods")
 public class AllGoods extends HttpServlet {
-
     DBUtil dbUtil;
 
     public AllGoods() {
@@ -22,16 +21,12 @@ public class AllGoods extends HttpServlet {
         dbUtil = new DBUtil();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         ArrayList<Goods> AllGoodsLi = null;
         String search = request.getParameter("search");
         String category = request.getParameter("category");
 
-        AllGoodsLi = dbUtil.getGoodsByParam(search,category);
+        AllGoodsLi = dbUtil.getGoodsByParam(search, category);
 
         request.setAttribute("AllGo", AllGoodsLi);
         request.getRequestDispatcher("/main-goods.jsp").forward(request, response);

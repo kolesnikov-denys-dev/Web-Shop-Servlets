@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @WebServlet("/deletegoods")
 public class DeleteGoods extends HttpServlet {
-
     DBUtil dbUtil;
 
     public DeleteGoods() {
@@ -29,9 +28,5 @@ public class DeleteGoods extends HttpServlet {
         } else {
             response.sendRedirect("pages");
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

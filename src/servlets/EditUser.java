@@ -13,7 +13,6 @@ import java.util.ArrayList;
 
 @WebServlet("/edituser")
 public class EditUser extends HttpServlet {
-
     DBUtil dbUtil;
 
     public EditUser() {
@@ -23,19 +22,14 @@ public class EditUser extends HttpServlet {
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-        if (request.getSession()!=null && request.getSession().getAttribute("login")!=null) {
+        if (request.getSession() != null && request.getSession().getAttribute("login") != null) {
             String idUser = request.getParameter("idUser");
             int id = Integer.parseInt(idUser);
             Users x = dbUtil.getUserById(id);
             request.setAttribute("userById", x);
             request.getRequestDispatcher("/edit.jsp").forward(request, response);
-        }
-        else {
+        } else {
             response.sendRedirect("pages");
         }
-    }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
     }
 }

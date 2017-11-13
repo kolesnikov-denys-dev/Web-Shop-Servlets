@@ -16,7 +16,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Барахолка</a>
+        <a class="navbar-brand" href="allgoods">Барахолка</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -50,20 +50,17 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 offset-2">
-
             <div class="form-inline">
                 <div class="col-lg-6">
                     <h1 class="mt-4">Мои товары</h1>
                 </div>
                 <div class="col-lg-4 offset-2">
-                    <button type="button" class="btn-new btn btn-warning btn-lg" data-toggle="modal" data-target="#myModal">
+                    <button type="button" class="btn-new btn btn-warning btn-lg" data-toggle="modal"
+                            data-target="#myModal">
                         Новое объявление
                     </button>
                 </div>
-
-
             </div>
-
             <!-- Modal -->
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -75,77 +72,64 @@
                         </div>
                         <div class="modal-body">
                             <%--ADD NEW--%>
-                            <div class="row">
-                                <div class="col-md-12">
-                                    <input type="text" class="form-control input-lg" placeholder="Название">
+                            <form action="addnewgoods" method="post">
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <input type="text" class="form-control input-lg" placeholder="Название"
+                                               name="title" autofocus>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6">
-                                    <input type="text" class="form-control input-sm" placeholder="Стоимость">
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <input type="text" class="form-control input-sm" placeholder="Стоимость ₴"
+                                               name="price">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <select class="form-control" name="category">
+                                            <option value="0">Выбрать рубрику</option>
+                                            <option value="1">Детский мир</option>
+                                            <option value="2">Недвижимость</option>
+                                            <option value="3">Транспорт</option>
+                                            <option value="4">Запчасти для транспорта</option>
+                                            <option value="5">Работа</option>
+                                            <option value="6">Животные</option>
+                                            <option value="7">Дом и сад</option>
+                                            <option value="8">Электроника</option>
+                                            <option value="9">Бизнес и услуги</option>
+                                            <option value="10">Мода и стиль</option>
+                                            <option value="11">Хобби, отдых и спорт</option>
+                                        </select>
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <select class="form-control" name="category">
-                                        <option value="0">Выбрать рубрику</option>
-                                        <option value="1">Детский мир</option>
-                                        <option value="2">Недвижимость</option>
-                                        <option value="3">Транспорт</option>
-                                        <option value="4">Запчасти для транспорта</option>
-                                        <option value="5">Работа</option>
-                                        <option value="6">Животные</option>
-                                        <option value="7">Дом и сад</option>
-                                        <option value="8">Электроника</option>
-                                        <option value="9">Бизнес и услуги</option>
-                                        <option value="10">Мода и стиль</option>
-                                        <option value="11">Хобби, отдых и спорт</option>
-                                    </select>
+                                <div class="row">
+                                    <div class="col-md-12">
+                                        <textarea class="form-control" rows="10" cols="50" id="message-text"
+                                                  name="description" placeholder="Описание..."></textarea>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-12">
-
-                                    <textarea class="form-control" rows="10" cols="50" id="message-text"
-                                              placeholder="Описание..."></textarea>
-
-                                </div>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <form>
-                                        <div class="form-group">
-                                            <label for="recipient-name" class="control-label">Recipient:</label>
-                                        </div>
-                                        <div class="form-group areaDesc">
-                                            <label for="message-text" class="control-label">Message:</label>
-                                        </div>
-
-
+                                <div class="row">
+                                    <div class="col-lg-12">
                                         <label class="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio1"
-                                                   value="option1"> Сохранить и
+                                            <input type="radio" name="published" id="inlineRadio1"
+                                                   value="ok"> Сохранить и
                                             опубликовать
                                         </label>
                                         <label class="radio-inline">
-                                            <input type="radio" name="inlineRadioOptions" id="inlineRadio2"
-                                                   value="option2"> Сохранить без
+                                            <input type="radio" name="published" id="inlineRadio2"
+                                                   value="no"> Сохранить без
                                             публикации
                                         </label>
-
-
-                                    </form>
-
-
-                                    <br>
+                                        <br>
+                                    </div>
                                 </div>
-                            </div>
-
-
+                                <button type="submit" class="btn btn-primary editBtn">Готово</button>
+                            </form>
                             <%--ADD NEW--%>
                         </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>
-                            <button type="button" class="btn btn-primary">Сохранить</button>
-                        </div>
+                        <%--<div class="modal-footer">--%>
+                        <%--<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>--%>
+                        <%--<button type="button" class="btn btn-primary">Сохранить</button>--%>
+                        <%--</div>--%>
                     </div>
                 </div>
             </div>

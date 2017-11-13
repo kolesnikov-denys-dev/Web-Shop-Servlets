@@ -11,7 +11,6 @@ import java.io.IOException;
 
 @WebServlet("/deleteuser")
 public class DeleteUser extends HttpServlet {
-
     DBUtil dbUtil;
 
     public DeleteUser() {
@@ -31,9 +30,4 @@ public class DeleteUser extends HttpServlet {
             response.sendRedirect("pages");
         }
     }
-
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
 }

@@ -9,16 +9,10 @@ import java.io.IOException;
 
 @WebServlet("/logout")
 public class Logout extends HttpServlet {
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
-
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
         if (request.getSession() != null && request.getSession().getAttribute("login") != null) {
-
             request.getSession().removeAttribute("login");
             response.sendRedirect("/login.jsp");
-
         } else {
             response.sendRedirect("/login.jsp");
         }

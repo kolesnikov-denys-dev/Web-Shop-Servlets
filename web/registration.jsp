@@ -15,7 +15,7 @@
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
     <div class="container">
-        <a class="navbar-brand" href="#">Барахолка</a>
+        <a class="navbar-brand" href="allgoods">Барахолка</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
                 aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -54,7 +54,7 @@
                 <hr>
                 <h2 align="center">Регистрация</h2>
                 <form action="addUser" method="post">
-                    <input <% if (request.getAttribute("lastEmail")!=null) {out.print("value=\""+ request.getAttribute("lastEmail")+"\"");}%>class="form-control"
+                    <input <% if (request.getAttribute("lastEmail")!=null) {out.print("value=\""+ request.getAttribute("lastEmail")+"\"");}%>class="form-control m-2 set-size"
                            type="email" name="email" placeholder="Емейл" autofocus>
                     <%
                         boolean exist = false;
@@ -65,15 +65,14 @@
                             }
                         }
                     %>
-                    <input class="form-control" type="password" name="password" placeholder="Пароль">
-                    <input class="form-control" type="password" name="password2" placeholder="Подтверждение пароля">
-                    <input <% if (request.getAttribute("lastName")!=null) {out.print("value=\""+ request.getAttribute("lastName")+"\"");}%>class="form-control"
+                    <input class="form-control set-size m-2" type="password" name="password" placeholder="Пароль">
+                    <input class="form-control set-size m-2" type="password" name="password2" placeholder="Подтверждение пароля">
+                    <input <% if (request.getAttribute("lastName")!=null) {out.print("value=\""+ request.getAttribute("lastName")+"\"");}%>class="form-control set-size m-2"
                            type="text" name="name" placeholder="Имя">
-                    <input <% if (request.getAttribute("lastSur")!=null) {out.print("value=\""+ request.getAttribute("lastSur")+"\"");}%>class="form-control"
+                    <input <% if (request.getAttribute("lastSur")!=null) {out.print("value=\""+ request.getAttribute("lastSur")+"\"");}%>class="form-control set-size m-2"
                            type="text" name="surname" placeholder="Фамилия">
-                    <input <% if (request.getAttribute("lastAge")!=null) {out.print("value=\""+ request.getAttribute("lastAge")+"\"");}%>class="form-control"
+                    <input <% if (request.getAttribute("lastAge")!=null) {out.print("value=\""+ request.getAttribute("lastAge")+"\"");}%>class="form-control set-size m-2"
                            type="number" name="age" placeholder="Возраст">
-                    <br>
                     <a href="login.jsp">
                         <button type="button" class="btn btn-primary">Вход</button>
                     </a>

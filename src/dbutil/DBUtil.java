@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import static java.lang.Integer.parseInt;
+import static java.lang.Integer.valueOf;
 
 public class DBUtil {
 
@@ -79,7 +80,7 @@ public class DBUtil {
     public void updateUser(String email, String password, String name, String surname, int age, String id) {
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate("UPDATE users SET  email=\"" + email + "\", password=SHA1(\"" + password + "\"),name=\"" + name + "\",surname=\"" + surname + "\",age=" + age + "  WHERE id = \"" + id + "\"");
+            st.executeUpdate("UPDATE users SET  email=\"" + email + "\", password=MD5(\"" + password + "\"),name=\"" + name + "\",surname=\"" + surname + "\",age=" + age + "  WHERE id = \"" + id + "\"");
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,7 +91,7 @@ public class DBUtil {
         Users u = null;
         try {
             Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery("SELECT id, email, password, name, surname, age FROM users WHERE email=\"" + email + "\"  AND password=SHA1(\"" + password + "\") LIMIT 1");
+            ResultSet result = st.executeQuery("SELECT id, email, password, name, surname, age FROM users WHERE email=\"" + email + "\"  AND password=MD5(\"" + password + "\") LIMIT 1");
             if (result.next()) {
                 int id = result.getInt("id");
                 String emailUser = result.getString("email");
@@ -201,7 +202,7 @@ public class DBUtil {
         if (search == null) search = "";
         try {
             Statement statement = connection.createStatement();
-            String queryAll = "SELECT * FROM goods";
+            String queryAll = null;
             boolean x = category.equals("0");
             if (search != null && x != true) {
                 queryAll = "SELECT * FROM goods WHERE published='1' AND category=\"" + category + "\" AND \n" +
@@ -238,8 +239,57 @@ public class DBUtil {
     public void updatePassword(String id, String password) {
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate("UPDATE users SET  password=SHA1(\"" + password + "\") WHERE id=\"" + id + "\"");
+            st.executeUpdate("UPDATE users SET  password=MD5(\"" + password + "\") WHERE id=\"" + id + "\"");
             st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    public boolean checkCurrentPassword(String id1, String password) {
+        boolean x = false;
+        try {
+            Statement st = connection.createStatement();
+            ResultSet result = st.executeQuery("SELECT password FROM users WHERE id=\"" + id1 + "\" AND password=md5(\"" + password + "\") LIMIT 1");
+
+            if (result != null) x = true;
+            else x = false;
+
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return x;
+    }
+
+    public void addNewGoods(Goods goods) {
+
+        int id_user = goods.getId_user();
+        int published = goods.getPublished();
+        String date = goods.getDate();
+        String time = goods.getTime();
+        int price = goods.getPrice();
+        String description = goods.getDescription();
+        String photo = goods.getPhoto();
+        String title = goods.getTitle();
+        int category = goods.getCategory();
+
+        try {
+            PreparedStatement ps = null;
+            ps = connection.prepareStatement("INSERT INTO goods " +
+                    "(id_user, published, date, time, price, description, photo, title, category) " +
+                    "VALUES (?,?,?,?,?,?,?,?,?)");
+            ps.setInt(1, id_user);
+            ps.setInt(2, published);
+            ps.setString(3, date);
+            ps.setString(4, time);
+            ps.setInt(5, price);
+            ps.setString(6, description);
+            ps.setString(7, photo);
+            ps.setString(8, title);
+            ps.setInt(9, category);
+            ps.executeUpdate();
+            ps.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
