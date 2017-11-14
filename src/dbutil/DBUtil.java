@@ -1,13 +1,12 @@
 package dbutil;
 
+import entities.Comments;
 import entities.Goods;
 import entities.Users;
 
-import java.awt.*;
 import java.sql.*;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
-import java.util.List;
 
 import static java.lang.Integer.parseInt;
 import static java.lang.Integer.valueOf;
@@ -296,7 +295,103 @@ public class DBUtil {
         }
     }
 
-    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols(){
+
+    public void addNewComment(Comments comments) {
+
+        Long idGoods = comments.getId_goods();
+        String title = comments.getTitle();
+        String content = comments.getContent();
+        String userName = comments.getUserName();
+        String userSurname = comments.getUserSurname();
+        String date = comments.getPostDate();
+        String time = comments.getPostTime();
+
+        try {
+            PreparedStatement ps = null;
+            ps = connection.prepareStatement("INSERT INTO comments" +
+                    "(id_goods, title, content, date, time, user_name, user_surname) " +
+                    "VALUES (?,?,?,?,?,?,?)");
+            ps.setInt(1, Math.toIntExact(idGoods));
+            ps.setString(2, title);
+            ps.setString(3, content);
+            ps.setString(4, date);
+            ps.setString(5, time);
+            ps.setString(6, userName);
+            ps.setString(7, userSurname);
+            ps.executeUpdate();
+            ps.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
+
+    public Goods showGoodsById(String idUser) {
+        Goods g = null;
+        try {
+            PreparedStatement preparedStatement = null;
+            preparedStatement = connection.prepareStatement("SELECT * FROM goods WHERE id = ? LIMIT 1");
+            preparedStatement.setInt(1, Integer.parseInt(idUser));
+            ResultSet result = preparedStatement.executeQuery();
+            if (result.next()) {
+                int id = result.getInt("id");
+                int id_user = result.getInt("id_user");
+                int published = result.getInt("published");
+                String date = result.getString("date");
+                int view_count = result.getInt("view_count");
+                String time = result.getString("time");
+                int price = result.getInt("price");
+                String description = result.getString("description");
+                String photo = result.getString("photo");
+                String title = result.getString("title");
+                int category = result.getInt("category");
+                g = new Goods(id, id_user, published, date, time, view_count, price, description, photo, title, category);
+            }
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return g;
+    }
+
+
+    public ArrayList<Comments> commentsList(String idGoods){
+        ArrayList<Comments> list = new ArrayList<Comments>();
+        Comments c = null;
+        try {
+            PreparedStatement preparedStatement = null;
+            preparedStatement = connection.prepareStatement("SELECT * FROM comments WHERE id_goods = ?");
+            preparedStatement.setInt(1, Integer.parseInt(idGoods));
+            ResultSet result = preparedStatement.executeQuery();
+            while (result.next()) {
+
+                Long id = result.getLong("id");
+                Long id_goods =result.getLong("id_goods");
+                String title = result.getString("title");
+                String content = result.getString("content");
+                String postDate = result.getString("date");
+                String postTime = result.getString("time");
+                String userName = result.getString("user_name");
+                String userSurname = result.getString("user_surname");
+
+                c = new Comments(id, id_goods, title, content, postDate, postTime, userName, userSurname);
+                list.add(c);
+            }
+            preparedStatement.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return list;
+    }
+
+
+
+
+
+
+
+    private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols() {
 
         @Override
         public String[] getMonths() {

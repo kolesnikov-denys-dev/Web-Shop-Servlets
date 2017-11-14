@@ -1,6 +1,7 @@
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="entities.Goods" %>
 <%@ page import="entities.Users" %>
+<%@ page import="java.util.ArrayList" %>
+<%@ page import="entities.Comments" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html lang="en">
 <head>
@@ -8,10 +9,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Товары</title>
+    <title>Blog Post - Start Bootstrap Template</title>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/blog-post.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="modal.css">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
@@ -23,26 +25,16 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
-                <%
-                    Users u = (Users) request.getSession().getAttribute("login");
-                    if (u == null) {
-                %>
-                <li class="nav-item active">
-                    <a class="nav-link text-warning" href="loginuser">Новое объявление
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <% } %>
-                <li class="nav-item active">
-                    <a class="nav-link" href="allgoods">Все товары
+                <li class="nav-item">
+                    <a class="nav-link active" href="allgoods">Все товары
                         <span class="sr-only">(current)</span>
                     </a>
                 </li>
                 <%
-
                     if (null != request.getSession().getAttribute("login")) {
+
                 %>
-                <li class="nav-item ">
+                <li class="nav-item">
                     <a class="nav-link" href="mygoods">Мои товары</a>
                 </li>
                 <li class="nav-item">
@@ -60,52 +52,20 @@
 </nav>
 <div class="container">
     <div class="row">
-        <div class="col-lg-2 col-sm-0">
-        </div>
-        <div class="col-lg-8 col-sm-12">
-            <h1 class="mt-4">Все товары</h1>
-
-            <form action="allgoods" method="get">
-                <div class="form-group search-form">
-                    <div class="row">
-                        <div class="col-lg-4 col-sm-6 p-sm-2">
-                            <input class="form-control" type="search" name="search" value="" placeholder="Поиск">
-                        </div>
-                        <div class="col-lg-4 col-sm-6 p-sm-2">
-                            <select class="form-control" name="category">
-                                <option value="0">Все товары</option>
-                                <option value="1">Детский мир</option>
-                                <option value="2">Недвижимость</option>
-                                <option value="3">Транспорт</option>
-                                <option value="4">Запчасти для транспорта</option>
-                                <option value="5">Работа</option>
-                                <option value="6">Животные</option>
-                                <option value="7">Дом и сад</option>
-                                <option value="8">Электроника</option>
-                                <option value="9">Бизнес и услуги</option>
-                                <option value="10">Мода и стиль</option>
-                                <option value="11">Хобби, отдых и спорт</option>
-                            </select>
-                        </div>
-                        <div class="col-lg-4 col-sm-12 p-sm-2">
-                            <button type="submit" class="btn btn-primary">Показать товары</button>
-                        </div>
-                    </div>
+        <div class="col-lg-8 offset-2">
+            <div class="form-inline">
+                <div class="col-lg-6">
+                    <h1 class="mt-4">Мои товары</h1>
                 </div>
-            </form>
+            </div>
+
+
             <hr>
             <%
-                ArrayList<Goods> MyListGoods = (ArrayList<Goods>) request.getAttribute("AllGo");
-                if (MyListGoods != null && MyListGoods.size() > 0) {
-                    for (Goods g : MyListGoods) {
+                Goods g = (Goods) request.getAttribute("currentGoodsId");
+                if (g != null) {
             %>
             <h3><% out.print(g.getTitle()); %></h3>
-
-            <form action="opengoods" method="post">
-                <input type="hidden" name="currentId" value="<% out.print(g.getId()); %>"></input>
-                <button type="submit" class="btn btn-warning" name="delete">Просмотр</button>
-            </form>
-
             <% if (g.getPublished() == 1) {
                 out.print("<p class=\"published\">Объявление: опубликовано</p>");
             } else {
@@ -174,6 +134,7 @@
             <p>Описание товара: <% out.print(g.getDescription()); %></p>
             <p>Фотография: <% out.print(g.getPhoto()); %></p>
             <%
+                Users u = (Users) request.getSession().getAttribute("login");
                 if (u != null) {
                     if (u.getId() == g.getId_user()) {
             %>
@@ -193,15 +154,63 @@
             %>
             <hr>
             <%
-                    }
                 } else {
                     out.print("<p> Нет товаров !</p> ");
                 }
             %>
+
+
+            <%--------------------------------------------------------%>
+
+
+
+            <h3>Коментарии </h3>
+            <hr>
+
+            <%
+                if (request.getAttribute("commentsList")!=null){
+                ArrayList<Comments> list = (ArrayList<Comments>) request.getAttribute("commentsList");
+                for (Comments c:list){
+                    %>
+                    <p>Пользователь:  <% out.print(c.getUserName()); %></p>
+                    <p>Когда написал: <% out.print(c.getUserSurname()); %></p>
+                    <p><% out.print(c.getContent()); %></p>
+            <hr>
+            <%
+                }}
+
+            %>
+
+
+
+            <%--------------------------------------------------------%>
+
+
+
+
+
+
+            <form action="postcomments" method="post">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <input type="hidden" value="<% out.print(g.getId()); %>" name="idGoodsC" >
+                            <input type="text" class="form-control input-lg" name="title">
+                        </div>
+                        <div class="col-md-12">
+                                        <textarea class="form-control" rows="10" cols="50" id="message-text"
+                                                  name="content" placeholder="Описание..."></textarea>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary" name="delete">Коментировать</button>
+            </form>
+
+
         </div>
-        <div class="col-lg-2 col-sm-0">
-        </div>
+
+        <hr>
+
     </div>
+</div>
 </div>
 <footer class="py-5 bg-dark">
     <div class="container">

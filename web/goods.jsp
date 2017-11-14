@@ -54,14 +54,26 @@
                 <div class="col-lg-6">
                     <h1 class="mt-4">Мои товары</h1>
                 </div>
+                <%  if (request.getSession() != null && request.getSession().getAttribute("login") != null){ %>
                 <div class="col-lg-4 offset-2">
                     <button type="button" class="btn-new btn btn-warning btn-lg" data-toggle="modal"
                             data-target="#myModal">
                         Новое объявление
                     </button>
                 </div>
+                <% } %>
+
+
+
+                <%--<form action="upload" method="post" enctype="multipart/form-data">--%>
+                    <%--<input type="file" name="file" multiple>--%>
+                    <%--<input type="submit" value="DONWLOAD">--%>
+                <%--</form>--%>
+
             </div>
             <!-- Modal -->
+            <%  if (request.getSession() != null && request.getSession().getAttribute("login") != null){ %>
+
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">
@@ -76,7 +88,7 @@
                                 <div class="row">
                                     <div class="col-md-12">
                                         <input type="text" class="form-control input-lg" placeholder="Название"
-                                               name="title" autofocus>
+                                               name="title">
                                     </div>
                                 </div>
                                 <div class="row">
@@ -107,6 +119,20 @@
                                                   name="description" placeholder="Описание..."></textarea>
                                     </div>
                                 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label class="radio-inline">
@@ -134,6 +160,9 @@
                 </div>
             </div>
             <%--modal--%>
+
+            <% } %>
+
             <br>
             <hr>
             <%

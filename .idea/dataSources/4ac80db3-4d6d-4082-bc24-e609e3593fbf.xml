@@ -15,127 +15,178 @@
     <schema id="9" parent="1" name="sys"/>
     <schema id="10" parent="1" name="test-db"/>
     <schema id="11" parent="1" name="new_schema"/>
-    <table id="12" parent="2" name="goods"/>
-    <table id="13" parent="2" name="users"/>
-    <column id="14" parent="12" name="id">
+    <table id="12" parent="2" name="comments"/>
+    <table id="13" parent="2" name="goods"/>
+    <table id="14" parent="2" name="users"/>
+    <column id="15" parent="12" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="15" parent="12" name="id_user">
+    <column id="16" parent="12" name="title">
+      <Position>2</Position>
+      <DataType>varchar(200)|0</DataType>
+    </column>
+    <column id="17" parent="12" name="content">
+      <Position>3</Position>
+      <DataType>varchar(400)|0</DataType>
+    </column>
+    <column id="18" parent="12" name="date">
+      <Position>4</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="19" parent="12" name="time">
+      <Position>5</Position>
+      <DataType>varchar(40)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <column id="20" parent="12" name="user_name">
+      <Position>6</Position>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <column id="21" parent="12" name="user_surname">
+      <Position>7</Position>
+      <DataType>varchar(40)|0</DataType>
+    </column>
+    <column id="22" parent="12" name="id_goods">
+      <Position>8</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+    </column>
+    <index id="23" parent="12" name="Comments_id_uindex">
+      <ColNames>id</ColNames>
+      <Unique>1</Unique>
+    </index>
+    <key id="24" parent="12" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <key id="25" parent="12" name="Comments_id_uindex">
+      <ColNames>id</ColNames>
+      <UnderlyingIndexName>Comments_id_uindex</UnderlyingIndexName>
+    </key>
+    <column id="26" parent="13" name="id">
+      <Position>1</Position>
+      <DataType>int(11)|0</DataType>
+      <NotNull>1</NotNull>
+      <SequenceIdentity>1</SequenceIdentity>
+    </column>
+    <column id="27" parent="13" name="id_user">
       <Position>2</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="16" parent="12" name="published">
+    <column id="28" parent="13" name="published">
       <Position>3</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="17" parent="12" name="date">
+    <column id="29" parent="13" name="date">
       <Position>4</Position>
       <DataType>char(40)|0</DataType>
     </column>
-    <column id="18" parent="12" name="time">
+    <column id="30" parent="13" name="time">
       <Position>5</Position>
       <DataType>char(40)|0</DataType>
     </column>
-    <column id="19" parent="12" name="view_count">
+    <column id="31" parent="13" name="view_count">
       <Position>6</Position>
       <DataType>int(11)|0</DataType>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <column id="20" parent="12" name="price">
+    <column id="32" parent="13" name="price">
       <Position>7</Position>
       <DataType>int(11)|0</DataType>
     </column>
-    <column id="21" parent="12" name="description">
+    <column id="33" parent="13" name="description">
       <Position>8</Position>
       <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="22" parent="12" name="photo">
+    <column id="34" parent="13" name="photo">
       <Position>9</Position>
       <DataType>varchar(200)|0</DataType>
     </column>
-    <column id="23" parent="12" name="title">
+    <column id="35" parent="13" name="title">
       <Position>10</Position>
       <DataType>varchar(100)|0</DataType>
     </column>
-    <column id="24" parent="12" name="category">
+    <column id="36" parent="13" name="category">
       <Position>11</Position>
       <DataType>int(3) unsigned|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <index id="25" parent="12" name="goods_id_uindex">
+    <index id="37" parent="13" name="goods_id_uindex">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="26" parent="12" name="PRIMARY">
+    <key id="38" parent="13" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="27" parent="12" name="goods_id_uindex">
+    <key id="39" parent="13" name="goods_id_uindex">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>goods_id_uindex</UnderlyingIndexName>
     </key>
-    <column id="28" parent="13" name="id">
+    <column id="40" parent="14" name="id">
       <Position>1</Position>
       <DataType>int(11)|0</DataType>
       <NotNull>1</NotNull>
       <SequenceIdentity>1</SequenceIdentity>
     </column>
-    <column id="29" parent="13" name="email">
+    <column id="41" parent="14" name="email">
       <Position>2</Position>
       <DataType>varchar(40)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="30" parent="13" name="password">
+    <column id="42" parent="14" name="password">
       <Position>3</Position>
       <DataType>varchar(40)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="31" parent="13" name="name">
+    <column id="43" parent="14" name="name">
       <Position>4</Position>
       <DataType>varchar(40)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="32" parent="13" name="surname">
+    <column id="44" parent="14" name="surname">
       <Position>5</Position>
       <DataType>varchar(40)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="33" parent="13" name="age">
+    <column id="45" parent="14" name="age">
       <Position>6</Position>
       <DataType>int(3)|0</DataType>
       <NotNull>1</NotNull>
     </column>
-    <column id="34" parent="13" name="category">
+    <column id="46" parent="14" name="category">
       <Position>7</Position>
       <DataType>int(2)|0</DataType>
       <NotNull>1</NotNull>
       <DefaultExpression>&apos;0&apos;</DefaultExpression>
     </column>
-    <index id="35" parent="13" name="users_id_uindex">
+    <index id="47" parent="14" name="users_id_uindex">
       <ColNames>id</ColNames>
       <Unique>1</Unique>
     </index>
-    <index id="36" parent="13" name="users_email_uindex">
+    <index id="48" parent="14" name="users_email_uindex">
       <ColNames>email</ColNames>
       <Unique>1</Unique>
     </index>
-    <key id="37" parent="13" name="PRIMARY">
+    <key id="49" parent="14" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id
 age
 surname</ColNames>
       <Primary>1</Primary>
     </key>
-    <key id="38" parent="13" name="users_id_uindex">
+    <key id="50" parent="14" name="users_id_uindex">
       <ColNames>id</ColNames>
       <UnderlyingIndexName>users_id_uindex</UnderlyingIndexName>
     </key>
-    <key id="39" parent="13" name="users_email_uindex">
+    <key id="51" parent="14" name="users_email_uindex">
       <ColNames>email</ColNames>
       <UnderlyingIndexName>users_email_uindex</UnderlyingIndexName>
     </key>
