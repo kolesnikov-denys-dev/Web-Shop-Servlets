@@ -27,15 +27,8 @@ public class Postcomments extends HttpServlet {
         request.setCharacterEncoding("UTF8");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-
-
-
         String id_Goods = request.getParameter("idGoodsC");
-
-        System.out.println(id_Goods+ "----------------------------------->>>>>>>>S");
         Long idGoods = Long.valueOf(id_Goods);
-        System.out.println(idGoods+ "----------------------------------->>>>>>>>L");
-
         Users u = (Users) request.getSession().getAttribute("login");
         Date date = new Date();
         SimpleDateFormat dateFormat = null;
@@ -52,10 +45,8 @@ public class Postcomments extends HttpServlet {
         System.out.println(currentTimeS);
         System.out.println(u.getName());
 
-        dbUtil.addNewComment(new Comments(null , idGoods, title, content, currentDateS, currentTimeS, u.getName(), u.getSurname()));
+        dbUtil.addNewComment(new Comments(null, idGoods, title, content, currentDateS, currentTimeS, u.getName(), u.getSurname()));
         response.sendRedirect("opengoods");
-
     }
-
 
 }

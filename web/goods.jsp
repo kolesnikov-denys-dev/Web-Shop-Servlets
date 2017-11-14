@@ -54,7 +54,7 @@
                 <div class="col-lg-6">
                     <h1 class="mt-4">Мои товары</h1>
                 </div>
-                <%  if (request.getSession() != null && request.getSession().getAttribute("login") != null){ %>
+                <% if (request.getSession() != null && request.getSession().getAttribute("login") != null) { %>
                 <div class="col-lg-4 offset-2">
                     <button type="button" class="btn-new btn btn-warning btn-lg" data-toggle="modal"
                             data-target="#myModal">
@@ -64,15 +64,14 @@
                 <% } %>
 
 
-
                 <%--<form action="upload" method="post" enctype="multipart/form-data">--%>
-                    <%--<input type="file" name="file" multiple>--%>
-                    <%--<input type="submit" value="DONWLOAD">--%>
+                <%--<input type="file" name="file" multiple>--%>
+                <%--<input type="submit" value="DONWLOAD">--%>
                 <%--</form>--%>
 
             </div>
             <!-- Modal -->
-            <%  if (request.getSession() != null && request.getSession().getAttribute("login") != null){ %>
+            <% if (request.getSession() != null && request.getSession().getAttribute("login") != null) { %>
 
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
@@ -121,18 +120,6 @@
                                 </div>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label class="radio-inline">
@@ -167,9 +154,10 @@
             <hr>
             <%
                 ArrayList<Goods> MyListGoods = (ArrayList<Goods>) request.getAttribute("MyList");
-                if (MyListGoods != null && MyListGoods.size() > 0) {
-                    for (Goods g : MyListGoods) {
-            %>
+            %><p>Количество ваших объявлений: <% out.print(MyListGoods.size());%></p><%
+            if (MyListGoods != null && MyListGoods.size() > 0) {
+                for (Goods g : MyListGoods) {
+        %>
             <h3><% out.print(g.getTitle()); %></h3>
             <% if (g.getPublished() == 1) {
                 out.print("<p class=\"published\">Объявление: опубликовано</p>");

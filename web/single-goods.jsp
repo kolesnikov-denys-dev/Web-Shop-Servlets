@@ -162,15 +162,18 @@
 
             <%--------------------------------------------------------%>
 
-
-
-            <h3>Коментарии </h3>
+            <h5>Коментарии </h5>
             <hr>
 
             <%
                 if (request.getAttribute("commentsList")!=null){
                 ArrayList<Comments> list = (ArrayList<Comments>) request.getAttribute("commentsList");
-                for (Comments c:list){
+
+               %>
+            <h6> Количество комментариев: <% out.print(list.size()); %></h6>
+            <%
+
+                 for (Comments c:list){
                     %>
                     <p>Пользователь:  <% out.print(c.getUserName()); %></p>
                     <p>Когда написал: <% out.print(c.getUserSurname()); %></p>
@@ -180,25 +183,17 @@
                 }}
 
             %>
-
-
-
             <%--------------------------------------------------------%>
-
-
-
-
-
 
             <form action="postcomments" method="post">
                     <div class="row">
                         <div class="col-md-12">
                             <input type="hidden" value="<% out.print(g.getId()); %>" name="idGoodsC" >
-                            <input type="text" class="form-control input-lg" name="title">
+                            <input type="text" class="form-control input-lg" name="title"  placeholder="Заголовок комментария">
                         </div>
                         <div class="col-md-12">
-                                        <textarea class="form-control" rows="10" cols="50" id="message-text"
-                                                  name="content" placeholder="Описание..."></textarea>
+                                        <textarea class="form-control" rows="7" cols="30" id="message-text"
+                                                  name="content" placeholder="Комментарий..."></textarea>
                         </div>
                     </div>
                     <button type="submit" class="btn btn-primary" name="delete">Коментировать</button>

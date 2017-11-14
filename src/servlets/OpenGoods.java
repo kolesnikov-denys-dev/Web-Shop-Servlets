@@ -25,14 +25,19 @@ public class OpenGoods extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String idGoods = request.getParameter("currentId");
-        Goods g =  dbUtil.showGoodsById(idGoods);
+
+//        if (idGoods != null) {
+//            request.getSession().setAttribute("lol", idGoods);
+//        } else {
+//            idGoods = (String) request.getSession().getAttribute("lol");
+//        }
+
+        Goods g = dbUtil.showGoodsById(idGoods);
         request.setAttribute("currentGoodsId", g);
 
         ArrayList<Comments> commentsList = dbUtil.commentsList(idGoods);
         request.setAttribute("commentsList", commentsList);
         request.getRequestDispatcher("/single-goods.jsp").forward(request, response);
-
-
 
     }
 

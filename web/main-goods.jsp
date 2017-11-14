@@ -96,15 +96,40 @@
             <hr>
             <%
                 ArrayList<Goods> MyListGoods = (ArrayList<Goods>) request.getAttribute("AllGo");
+
+
+            %>
+
+            <p>Найдено объявления по вашему запросу: <% out.print(MyListGoods.size());%></p>
+
+
+            <%
+
                 if (MyListGoods != null && MyListGoods.size() > 0) {
                     for (Goods g : MyListGoods) {
             %>
-            <h3><% out.print(g.getTitle()); %></h3>
 
-            <form action="opengoods" method="post">
-                <input type="hidden" name="currentId" value="<% out.print(g.getId()); %>"></input>
-                <button type="submit" class="btn btn-warning" name="delete">Просмотр</button>
-            </form>
+            <div class="row">
+
+
+                <div class="col-lg-2">
+                    <form action="opengoods" method="post">
+                        <input type="hidden" name="currentId" value="<% out.print(g.getId()); %>"></input>
+                        <button type="submit" class="btn btn-warning" name="delete">Подробнее</button>
+                    </form>
+
+
+
+
+                </div>
+                <div class="col-lg-7">
+                    <h3><% out.print(g.getTitle()); %></h3>
+                </div>
+
+            </div>
+
+
+
 
             <% if (g.getPublished() == 1) {
                 out.print("<p class=\"published\">Объявление: опубликовано</p>");

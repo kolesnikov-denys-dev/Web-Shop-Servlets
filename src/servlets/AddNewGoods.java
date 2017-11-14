@@ -23,7 +23,6 @@ public class AddNewGoods extends HttpServlet {
         dbUtil = new DBUtil();
     }
 
-
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         if (request.getSession() != null && request.getSession().getAttribute("login") != null) {
@@ -36,8 +35,7 @@ public class AddNewGoods extends HttpServlet {
             int active;
             if (published.equals("ok")) {
                 active = 1;
-            }
-            else {
+            } else {
                 active = 0;
             }
 
@@ -55,7 +53,7 @@ public class AddNewGoods extends HttpServlet {
             String title = request.getParameter("title");
             int category = Integer.parseInt(request.getParameter("category"));
 
-            Goods goods = new Goods(idUser, active, currentDateS, currentTimeS, price, description, photo, title, category );
+            Goods goods = new Goods(idUser, active, currentDateS, currentTimeS, price, description, photo, title, category);
 
             dbUtil.addNewGoods(goods);
 
@@ -63,10 +61,6 @@ public class AddNewGoods extends HttpServlet {
         } else {
             response.sendRedirect("/login.jsp");
         }
-
     }
-
-
-
 
 }
