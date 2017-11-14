@@ -355,7 +355,6 @@ public class DBUtil {
         return g;
     }
 
-
     public ArrayList<Comments> commentsList(String idGoods){
         ArrayList<Comments> list = new ArrayList<Comments>();
         Comments c = null;
@@ -385,14 +384,7 @@ public class DBUtil {
         return list;
     }
 
-
-
-
-
-
-
     private static DateFormatSymbols myDateFormatSymbols = new DateFormatSymbols() {
-
         @Override
         public String[] getMonths() {
             return new String[]{"января", "февраля", "марта", "апреля", "мая", "июня",

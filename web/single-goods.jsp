@@ -32,7 +32,6 @@
                 </li>
                 <%
                     if (null != request.getSession().getAttribute("login")) {
-
                 %>
                 <li class="nav-item">
                     <a class="nav-link" href="mygoods">Мои товары</a>
@@ -158,13 +157,9 @@
                     out.print("<p> Нет товаров !</p> ");
                 }
             %>
-
-
             <%--------------------------------------------------------%>
-
             <h5>Коментарии </h5>
             <hr>
-
             <%
                 if (request.getAttribute("commentsList")!=null){
                 ArrayList<Comments> list = (ArrayList<Comments>) request.getAttribute("commentsList");
@@ -184,11 +179,10 @@
 
             %>
             <%--------------------------------------------------------%>
-
-            <form action="postcomments" method="post">
+            <form action="postcomments" method="get">
                     <div class="row">
                         <div class="col-md-12">
-                            <input type="hidden" value="<% out.print(g.getId()); %>" name="idGoodsC" >
+                            <input type="hidden" value="<% out.print(g.getId()); %>" name="currentId" >
                             <input type="text" class="form-control input-lg" name="title"  placeholder="Заголовок комментария">
                         </div>
                         <div class="col-md-12">
@@ -198,10 +192,7 @@
                     </div>
                     <button type="submit" class="btn btn-primary" name="delete">Коментировать</button>
             </form>
-
-
         </div>
-
         <hr>
 
     </div>

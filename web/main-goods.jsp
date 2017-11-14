@@ -39,7 +39,6 @@
                     </a>
                 </li>
                 <%
-
                     if (null != request.getSession().getAttribute("login")) {
                 %>
                 <li class="nav-item ">
@@ -113,12 +112,7 @@
 
 
                 <div class="col-lg-2">
-                    <form action="opengoods" method="post">
-                        <input type="hidden" name="currentId" value="<% out.print(g.getId()); %>"></input>
-                        <button type="submit" class="btn btn-warning" name="delete">Подробнее</button>
-                    </form>
-
-
+                    <a href="/opengoods?currentId=<% out.print(g.getId()); %>" class="btn btn-warning">Подробнее</a>
 
 
                 </div>
@@ -127,8 +121,6 @@
                 </div>
 
             </div>
-
-
 
 
             <% if (g.getPublished() == 1) {

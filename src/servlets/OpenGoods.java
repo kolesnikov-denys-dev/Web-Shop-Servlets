@@ -22,15 +22,9 @@ public class OpenGoods extends HttpServlet {
         dbUtil = new DBUtil();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         String idGoods = request.getParameter("currentId");
-
-//        if (idGoods != null) {
-//            request.getSession().setAttribute("lol", idGoods);
-//        } else {
-//            idGoods = (String) request.getSession().getAttribute("lol");
-//        }
 
         Goods g = dbUtil.showGoodsById(idGoods);
         request.setAttribute("currentGoodsId", g);
@@ -41,7 +35,4 @@ public class OpenGoods extends HttpServlet {
 
     }
 
-    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-    }
 }

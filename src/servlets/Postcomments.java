@@ -22,12 +22,12 @@ public class Postcomments extends HttpServlet {
         dbUtil = new DBUtil();
     }
 
-    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
         request.setCharacterEncoding("UTF8");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
-        String id_Goods = request.getParameter("idGoodsC");
+        String id_Goods = request.getParameter("currentId");
         Long idGoods = Long.valueOf(id_Goods);
         Users u = (Users) request.getSession().getAttribute("login");
         Date date = new Date();
@@ -46,7 +46,8 @@ public class Postcomments extends HttpServlet {
         System.out.println(u.getName());
 
         dbUtil.addNewComment(new Comments(null, idGoods, title, content, currentDateS, currentTimeS, u.getName(), u.getSurname()));
-        response.sendRedirect("opengoods");
+
+        request.getRequestDispatcher("opengoods").forward(request,response);
     }
 
 }
