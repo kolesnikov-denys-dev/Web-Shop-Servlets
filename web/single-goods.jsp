@@ -16,39 +16,7 @@
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="allgoods">Барахолка</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" href="allgoods">Все товары
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <%
-                    if (null != request.getSession().getAttribute("login")) {
-                %>
-                <li class="nav-item">
-                    <a class="nav-link" href="mygoods">Мои товары</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="options.jsp">Настройки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout">Выход</a>
-                </li>
-                <%
-                    }
-                %>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:include page="navigation.jsp"></jsp:include>
 <div class="container">
     <div class="row">
         <div class="col-lg-8 offset-2">
@@ -57,8 +25,6 @@
                     <h1 class="mt-4">Мои товары</h1>
                 </div>
             </div>
-
-
             <hr>
             <%
                 Goods g = (Goods) request.getAttribute("currentGoodsId");
@@ -157,52 +123,45 @@
                     out.print("<p> Нет товаров !</p> ");
                 }
             %>
-            <%--------------------------------------------------------%>
             <h5>Коментарии </h5>
             <hr>
             <%
-                if (request.getAttribute("commentsList")!=null){
-                ArrayList<Comments> list = (ArrayList<Comments>) request.getAttribute("commentsList");
-
-               %>
-            <h6> Количество комментариев: <% out.print(list.size()); %></h6>
-            <%
-
-                 for (Comments c:list){
-                    %>
-                    <p>Пользователь:  <% out.print(c.getUserName()); %></p>
-                    <p>Когда написал: <% out.print(c.getUserSurname()); %></p>
-                    <p><% out.print(c.getContent()); %></p>
-            <hr>
-            <%
-                }}
+                if (request.getAttribute("commentsList") != null) {
+                    ArrayList<Comments> list = (ArrayList<Comments>) request.getAttribute("commentsList");
 
             %>
-            <%--------------------------------------------------------%>
+            <h6> Количество комментариев: <% out.print(list.size()); %></h6>
+            <%
+                for (Comments c : list) {
+            %>
+            <p>Пользователь:  <% out.print(c.getUserName()); %></p>
+            <p>Когда написал: <% out.print(c.getUserSurname()); %></p>
+            <p><% out.print(c.getContent()); %></p>
+            <hr>
+            <%
+                    }
+                }
+            %>
             <form action="postcomments" method="get">
-                    <div class="row">
-                        <div class="col-md-12">
-                            <input type="hidden" value="<% out.print(g.getId()); %>" name="currentId" >
-                            <input type="text" class="form-control input-lg" name="title"  placeholder="Заголовок комментария">
-                        </div>
-                        <div class="col-md-12">
+                <div class="row">
+                    <div class="col-md-12">
+                        <input type="hidden" value="<% out.print(g.getId()); %>" name="currentId">
+                        <input type="text" class="form-control input-lg" name="title"
+                               placeholder="Заголовок комментария">
+                    </div>
+                    <div class="col-md-12">
                                         <textarea class="form-control" rows="7" cols="30" id="message-text"
                                                   name="content" placeholder="Комментарий..."></textarea>
-                        </div>
                     </div>
-                    <button type="submit" class="btn btn-primary" name="delete">Коментировать</button>
+                </div>
+                <button type="submit" class="btn btn-primary" name="delete">Коментировать</button>
             </form>
         </div>
         <hr>
-
     </div>
 </div>
 </div>
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Барахолка 2017</p>
-    </div>
-</footer>
+<jsp:include page="footer.jsp"></jsp:include>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

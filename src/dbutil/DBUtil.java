@@ -12,7 +12,6 @@ import static java.lang.Integer.parseInt;
 import static java.lang.Integer.valueOf;
 
 public class DBUtil {
-
     private Connection connection;
 
     public DBUtil() {
@@ -251,10 +250,8 @@ public class DBUtil {
         try {
             Statement st = connection.createStatement();
             ResultSet result = st.executeQuery("SELECT password FROM users WHERE id=\"" + id1 + "\" AND password=md5(\"" + password + "\") LIMIT 1");
-
             if (result != null) x = true;
             else x = false;
-
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -273,7 +270,6 @@ public class DBUtil {
         String photo = goods.getPhoto();
         String title = goods.getTitle();
         int category = goods.getCategory();
-
         try {
             PreparedStatement ps = null;
             ps = connection.prepareStatement("INSERT INTO goods " +
@@ -295,9 +291,7 @@ public class DBUtil {
         }
     }
 
-
     public void addNewComment(Comments comments) {
-
         Long idGoods = comments.getId_goods();
         String title = comments.getTitle();
         String content = comments.getContent();
@@ -324,8 +318,6 @@ public class DBUtil {
             e.printStackTrace();
         }
     }
-
-
 
     public Goods showGoodsById(String idUser) {
         Goods g = null;
@@ -355,7 +347,7 @@ public class DBUtil {
         return g;
     }
 
-    public ArrayList<Comments> commentsList(String idGoods){
+    public ArrayList<Comments> commentsList(String idGoods) {
         ArrayList<Comments> list = new ArrayList<Comments>();
         Comments c = null;
         try {
@@ -366,7 +358,7 @@ public class DBUtil {
             while (result.next()) {
 
                 Long id = result.getLong("id");
-                Long id_goods =result.getLong("id_goods");
+                Long id_goods = result.getLong("id_goods");
                 String title = result.getString("title");
                 String content = result.getString("content");
                 String postDate = result.getString("date");

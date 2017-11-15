@@ -14,39 +14,7 @@
     <link rel="stylesheet" href="modal.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="allgoods">Барахолка</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link" href="allgoods">Все товары
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <%
-                    if (null != request.getSession().getAttribute("login")) {
-                %>
-                <li class="nav-item active">
-                    <a class="nav-link" href="mygoods">Мои товары</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="options.jsp">Настройки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout">Выход</a>
-                </li>
-                <%
-                    }
-                %>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:include page="navigation.jsp"></jsp:include>
 <div class="container">
     <div class="row">
         <div class="col-lg-8 offset-2">
@@ -62,18 +30,6 @@
                     </button>
                 </div>
                 <% } %>
-
-
-
-
-
-
-
-
-
-
-
-
             </div>
             <!-- Modal -->
             <% if (request.getSession() != null && request.getSession().getAttribute("login") != null) { %>
@@ -123,8 +79,6 @@
                                                   name="description" placeholder="Описание..."></textarea>
                                     </div>
                                 </div>
-
-
                                 <div class="row">
                                     <div class="col-lg-12">
                                         <label class="radio-inline">
@@ -142,19 +96,12 @@
                                 </div>
                                 <button type="submit" class="btn btn-primary editBtn">Готово</button>
                             </form>
-                            <%--ADD NEW--%>
                         </div>
-                        <%--<div class="modal-footer">--%>
-                        <%--<button type="button" class="btn btn-default" data-dismiss="modal">Отмена</button>--%>
-                        <%--<button type="button" class="btn btn-primary">Сохранить</button>--%>
-                        <%--</div>--%>
                     </div>
                 </div>
             </div>
             <%--modal--%>
-
             <% } %>
-
             <br>
             <hr>
             <%
@@ -198,11 +145,7 @@
         </div>
     </div>
 </div>
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Барахолка 2017</p>
-    </div>
-</footer>
+<jsp:include page="footer.jsp"></jsp:include>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>

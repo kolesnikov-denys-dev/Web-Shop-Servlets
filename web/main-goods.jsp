@@ -14,56 +14,16 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-    <div class="container">
-        <a class="navbar-brand" href="allgoods">Барахолка</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive"
-                aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
-            <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarResponsive">
-            <ul class="navbar-nav ml-auto">
-                <%
-                    Users u = (Users) request.getSession().getAttribute("login");
-                    if (u == null) {
-                %>
-                <li class="nav-item active">
-                    <a class="nav-link text-warning" href="loginuser">Новое объявление
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <% } %>
-                <li class="nav-item active">
-                    <a class="nav-link" href="allgoods">Все товары
-                        <span class="sr-only">(current)</span>
-                    </a>
-                </li>
-                <%
-                    if (null != request.getSession().getAttribute("login")) {
-                %>
-                <li class="nav-item ">
-                    <a class="nav-link" href="mygoods">Мои товары</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="options.jsp">Настройки</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="logout">Выход</a>
-                </li>
-                <%
-                    }
-                %>
-            </ul>
-        </div>
-    </div>
-</nav>
+<jsp:include page="navigation.jsp"></jsp:include>
+<%
+    Users u = (Users) request.getSession().getAttribute("login");
+%>
 <div class="container">
     <div class="row">
         <div class="col-lg-2 col-sm-0">
         </div>
         <div class="col-lg-8 col-sm-12">
             <h1 class="mt-4">Все товары</h1>
-
             <form action="allgoods" method="get">
                 <div class="form-group search-form">
                     <div class="row">
@@ -95,33 +55,20 @@
             <hr>
             <%
                 ArrayList<Goods> MyListGoods = (ArrayList<Goods>) request.getAttribute("AllGo");
-
-
             %>
-
             <p>Найдено объявления по вашему запросу: <% out.print(MyListGoods.size());%></p>
-
-
             <%
-
                 if (MyListGoods != null && MyListGoods.size() > 0) {
                     for (Goods g : MyListGoods) {
             %>
-
             <div class="row">
-
-
                 <div class="col-lg-2">
                     <a href="/opengoods?currentId=<% out.print(g.getId()); %>" class="btn btn-warning">Подробнее</a>
-
-
                 </div>
                 <div class="col-lg-7">
                     <h3><% out.print(g.getTitle()); %></h3>
                 </div>
-
             </div>
-
 
             <% if (g.getPublished() == 1) {
                 out.print("<p class=\"published\">Объявление: опубликовано</p>");
@@ -131,56 +78,8 @@
             %>
             <p>Рубрика:
                 <%
-                    switch (g.getCategory()) {
-                        case 0: {
-                            out.print("Не определена");
-                        }
-                        break;
-                        case 1: {
-                            out.print("Детский мир");
-                        }
-                        break;
-                        case 2: {
-                            out.print("Недвижимость");
-                        }
-                        break;
-                        case 3: {
-                            out.print("Транспорт");
-                        }
-                        break;
-                        case 4: {
-                            out.print("Запчасти для транспорта");
-                        }
-                        break;
-                        case 5: {
-                            out.print("Работа");
-                        }
-                        break;
-                        case 6: {
-                            out.print("Животные");
-                        }
-                        break;
-                        case 7: {
-                            out.print("Дом и сад");
-                        }
-                        break;
-                        case 8: {
-                            out.print("Электроника");
-                        }
-                        break;
-                        case 9: {
-                            out.print("Бизнес и услуги");
-                        }
-                        break;
-                        case 10: {
-                            out.print("Мода и стиль");
-                        }
-                        break;
-                        case 11: {
-                            out.print("Хобби, отдых и спорт");
-                        }
-                        break;
-                    }
+                    String rybrika[] = {"Не определена", "Детский мир", "Недвижимость", "Транспорт", "Запчасти для транспорта", "Работа", "Животные", "Дом и сад", "Электроника", "Бизнес и услуги", "Мода и стиль", "Хобби, отдых и спорт"};
+                    out.print(rybrika[g.getCategory()]);
                 %>
             </p>
             <%--<p>Автор: <% out.print(u.getName());%>  <% %></p>--%>
@@ -220,11 +119,7 @@
         </div>
     </div>
 </div>
-<footer class="py-5 bg-dark">
-    <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; Барахолка 2017</p>
-    </div>
-</footer>
+<jsp:include page="footer.jsp"></jsp:include>
 <script src="vendor/jquery/jquery.min.js"></script>
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
