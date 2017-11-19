@@ -79,7 +79,7 @@ public class DBUtil {
     public void updateUser(String email, String password, String name, String surname, int age, String id) {
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate("UPDATE users SET  email=\"" + email + "\", password=MD5(\"" + password + "\"),name=\"" + name + "\",surname=\"" + surname + "\",age=" + age + "  WHERE id = \"" + id + "\"");
+            st.executeUpdate("UPDATE users SET  email=\"" + email + "\", password=(\"" + password + "\"),name=\"" + name + "\",surname=\"" + surname + "\",age=" + age + "  WHERE id = \"" + id + "\"");
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -90,7 +90,7 @@ public class DBUtil {
         Users u = null;
         try {
             Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery("SELECT id, email, password, name, surname, age FROM users WHERE email=\"" + email + "\"  AND password=MD5(\"" + password + "\") LIMIT 1");
+            ResultSet result = st.executeQuery("SELECT id, email, password, name, surname, age FROM users WHERE email=\"" + email + "\"  AND password=(\"" + password + "\") LIMIT 1");
             if (result.next()) {
                 int id = result.getInt("id");
                 String emailUser = result.getString("email");
@@ -99,6 +99,7 @@ public class DBUtil {
                 String surname = result.getString("surname");
                 int age = result.getInt("age");
                 u = new Users(id, emailUser, passwordUser, name, surname, age);
+                System.out.println("Пользователь проверен!");
             }
             st.close();
         } catch (Exception e) {
@@ -147,6 +148,17 @@ public class DBUtil {
             e.printStackTrace();
         }
     }
+
+    public void deleteCommentsById(String idComments) {
+        try {
+            Statement st = connection.createStatement();
+            st.executeUpdate("DELETE FROM comments WHERE id = \"" + idComments + "\"");
+            st.close();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
 
     public Goods getGoodsById(String idG) {
         Goods goods = null;
@@ -238,20 +250,28 @@ public class DBUtil {
     public void updatePassword(String id, String password) {
         try {
             Statement st = connection.createStatement();
-            st.executeUpdate("UPDATE users SET  password=MD5(\"" + password + "\") WHERE id=\"" + id + "\"");
+            st.executeUpdate("UPDATE users SET  password=(\"" + password + "\") WHERE id=\"" + id + "\"");
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
 
-    public boolean checkCurrentPassword(String id1, String password) {
+    public boolean checkCurrentPassword(String id1, int password) {
         boolean x = false;
         try {
             Statement st = connection.createStatement();
-            ResultSet result = st.executeQuery("SELECT password FROM users WHERE id=\"" + id1 + "\" AND password=md5(\"" + password + "\") LIMIT 1");
-            if (result != null) x = true;
-            else x = false;
+            ResultSet result = st.executeQuery("SELECT password FROM users WHERE id=\"" + id1 + "\" AND password=(\"" + password + "\") LIMIT 1");
+
+            if (result.next()) {
+                int pass = result.getInt("password");
+                if (password==pass) {
+                    x = true;
+                } else {
+                    x = false;
+                }
+            }
+
             st.close();
         } catch (Exception e) {
             e.printStackTrace();
@@ -293,6 +313,8 @@ public class DBUtil {
 
     public void addNewComment(Comments comments) {
         Long idGoods = comments.getId_goods();
+        Long idUser = comments.getId_user();
+
         String title = comments.getTitle();
         String content = comments.getContent();
         String userName = comments.getUserName();
@@ -300,18 +322,20 @@ public class DBUtil {
         String date = comments.getPostDate();
         String time = comments.getPostTime();
 
+
         try {
             PreparedStatement ps = null;
             ps = connection.prepareStatement("INSERT INTO comments" +
-                    "(id_goods, title, content, date, time, user_name, user_surname) " +
-                    "VALUES (?,?,?,?,?,?,?)");
+                    "(id_goods,id_user, title, content, date, time, user_name, user_surname) " +
+                    "VALUES (?,?,?,?,?,?,?,?)");
             ps.setInt(1, Math.toIntExact(idGoods));
-            ps.setString(2, title);
-            ps.setString(3, content);
-            ps.setString(4, date);
-            ps.setString(5, time);
-            ps.setString(6, userName);
-            ps.setString(7, userSurname);
+            ps.setInt(2, Math.toIntExact(idUser));
+            ps.setString(3, title);
+            ps.setString(4, content);
+            ps.setString(5, date);
+            ps.setString(6, time);
+            ps.setString(7, userName);
+            ps.setString(8, userSurname);
             ps.executeUpdate();
             ps.close();
         } catch (Exception e) {
@@ -359,6 +383,7 @@ public class DBUtil {
 
                 Long id = result.getLong("id");
                 Long id_goods = result.getLong("id_goods");
+                Long id_user = result.getLong("id_user");
                 String title = result.getString("title");
                 String content = result.getString("content");
                 String postDate = result.getString("date");
@@ -366,7 +391,7 @@ public class DBUtil {
                 String userName = result.getString("user_name");
                 String userSurname = result.getString("user_surname");
 
-                c = new Comments(id, id_goods, title, content, postDate, postTime, userName, userSurname);
+                c = new Comments(id, id_goods, id_user, title, content, postDate, postTime, userName, userSurname);
                 list.add(c);
             }
             preparedStatement.close();

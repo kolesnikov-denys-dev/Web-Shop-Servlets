@@ -16,27 +16,31 @@ public class UpdatePasswordById extends HttpServlet {
     DBUtil dbUtil;
 
     public UpdatePasswordById() {
-        super();
         dbUtil = new DBUtil();
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        if (request.getSession() != null && request.getSession().getAttribute("login") != null) {
-            String currentPassword = request.getParameter("currentPassword");
+        boolean online = (boolean)request.getAttribute("userOnline");
+        if (online) {
+            int currentPassword = Integer.parseInt(request.getParameter("currentPassword"));
             String newPassword = request.getParameter("newPassword");
-            String reNewPassword = request.getParameter("reNewPassword");
+            String rePassword = request.getParameter("reNewPassword");
             String id = request.getParameter("idUser");
-            boolean checkPass = dbUtil.checkCurrentPassword(id, currentPassword);
-            boolean check = false;
-            if (checkPass && newPassword.equals(reNewPassword)) {
-                dbUtil.updatePassword(id, newPassword);
-                response.sendRedirect("/loginuser");
-                request.getSession().removeAttribute("login");
-            } else {
-                check = true;
-                request.setAttribute("errorPassword", check);
-                request.getRequestDispatcher("/options.jsp").forward(request, response);
+
+            boolean curPas = false;
+            boolean pasAndRePas = false;
+            if (newPassword.equals(rePassword)){
+                pasAndRePas = true;
             }
+
+            curPas = dbUtil.checkCurrentPassword(id, currentPassword);
+            request.setAttribute("pasAndRePas", pasAndRePas);
+            request.setAttribute("curPas", curPas);
+
+            if (curPas && pasAndRePas) {
+                dbUtil.updatePassword(id, newPassword);
+            }
+            request.getRequestDispatcher("/options.jsp").forward(request, response);
         }
     }
 }

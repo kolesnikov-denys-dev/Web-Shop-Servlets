@@ -22,7 +22,13 @@
                 <div class="col-lg-6">
                     <h1 class="mt-4">Мои товары</h1>
                 </div>
-                <% if (request.getSession() != null && request.getSession().getAttribute("login") != null) { %>
+                <%
+                    boolean login = false;
+                    login = (boolean) request.getAttribute("userOnline");
+                %>
+                <%
+                    if (login) {
+                %>
                 <div class="col-lg-4 offset-2">
                     <button type="button" class="btn-new btn btn-warning btn-lg" data-toggle="modal"
                             data-target="#myModal">
@@ -32,8 +38,7 @@
                 <% } %>
             </div>
             <!-- Modal -->
-            <% if (request.getSession() != null && request.getSession().getAttribute("login") != null) { %>
-
+            <% if (login) { %>
             <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
                 <div class="modal-dialog" role="document">
                     <div class="modal-content">

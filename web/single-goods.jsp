@@ -39,56 +39,8 @@
             %>
             <p>Рубрика:
                 <%
-                    switch (g.getCategory()) {
-                        case 0: {
-                            out.print("Не определена");
-                        }
-                        break;
-                        case 1: {
-                            out.print("Детский мир");
-                        }
-                        break;
-                        case 2: {
-                            out.print("Недвижимость");
-                        }
-                        break;
-                        case 3: {
-                            out.print("Транспорт");
-                        }
-                        break;
-                        case 4: {
-                            out.print("Запчасти для транспорта");
-                        }
-                        break;
-                        case 5: {
-                            out.print("Работа");
-                        }
-                        break;
-                        case 6: {
-                            out.print("Животные");
-                        }
-                        break;
-                        case 7: {
-                            out.print("Дом и сад");
-                        }
-                        break;
-                        case 8: {
-                            out.print("Электроника");
-                        }
-                        break;
-                        case 9: {
-                            out.print("Бизнес и услуги");
-                        }
-                        break;
-                        case 10: {
-                            out.print("Мода и стиль");
-                        }
-                        break;
-                        case 11: {
-                            out.print("Хобби, отдых и спорт");
-                        }
-                        break;
-                    }
+                    String rybrika[] = {"Не определена", "Детский мир", "Недвижимость", "Транспорт", "Запчасти для транспорта", "Работа", "Животные", "Дом и сад", "Электроника", "Бизнес и услуги", "Мода и стиль", "Хобби, отдых и спорт"};
+                    out.print(rybrika[g.getCategory()]);
                 %>
             </p>
             <%--<p>Автор: <% out.print(u.getName());%>  <% %></p>--%>
@@ -123,25 +75,57 @@
                     out.print("<p> Нет товаров !</p> ");
                 }
             %>
-            <h5>Коментарии </h5>
-            <hr>
             <%
                 if (request.getAttribute("commentsList") != null) {
                     ArrayList<Comments> list = (ArrayList<Comments>) request.getAttribute("commentsList");
 
             %>
+            <h5>Коментарии </h5>
             <h6> Количество комментариев: <% out.print(list.size()); %></h6>
+            <hr>
             <%
                 for (Comments c : list) {
             %>
-            <p>Пользователь:  <% out.print(c.getUserName()); %></p>
-            <p>Когда написал: <% out.print(c.getUserSurname()); %></p>
+            <div class="row">
+                <div class="col-lg-1">
+                    <img src="img/anonym.gif" alt="avatar" style="width: 50px; height: 50px; border-radius: 100%;">
+                </div>
+                <div class="col-lg-5 m-0 ">
+                    <span>Пользователь: </span>
+                    <p class="m-0"><% out.print(c.getUserName()); %> <% out.print(c.getUserSurname()); %></p>
+                </div>
+                <div class="col-lg-3 m-0 ">
+                </div>
+                <div class="col-lg-3 m-0 align">
+                    <p class="m-0"><% out.print(c.getPostDate()); %></p>
+                    <p class="m-0"><% out.print(c.getPostTime()); %></p>
+                </div>
+            </div>
+            <h5 class="mt-3"><% out.print(c.getTitle());%></h5>
             <p><% out.print(c.getContent()); %></p>
             <hr>
-            <%
-                    }
-                }
+            <% if (request.getSession().getAttribute("login") != null) {
+                Users u = (Users) request.getSession().getAttribute("login");
+                System.out.println(c.getId_user());
+                System.out.println(u.getId());
+                if (u != null) {
+                    if (c.getId_user() == u.getId()) {
             %>
+            <form action="deletecomments" method="get">
+                <input type="hidden" name="idComment" value="<% out.print(c.getId());%>">
+                <input type="hidden" name="idPost" value="<% out.print(g.getId());%>">
+                <button type="submit" class="btn btn-danger " name="delete">Удалить</button>
+            </form>
+            <%
+                                }
+                            }
+                        }
+                    }
+
+                }
+
+            %>
+
             <form action="postcomments" method="get">
                 <div class="row">
                     <div class="col-md-12">

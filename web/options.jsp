@@ -19,40 +19,56 @@
             <h1 class="mt-4">Настройки профиля</h1>
             <hr>
             <%
-                if (null != request.getSession().getAttribute("login")) {
+                if (request.getSession().getAttribute("login")!=null) {
                     Users x = (Users) request.getSession().getAttribute("login");
             %>
             <form action="updatepasswordbyid" method="post">
                 <p>Email: <% out.print(x.getEmail()); %></p>
-                <p>Ваше Ф.И: <% out.print(x.getName()); %> <% out.print(x.getSurname()); %></p>
+                <p>Ф.И: <% out.print(x.getName()); %> <% out.print(x.getSurname()); %></p>
                 <p>Возраст: <% out.print(x.getAge()); %></p>
-
                 <h4>Изменить пароль</h4>
                 <%
-                    if (request.getAttribute("errorPassword")!=null){
-                    boolean exist = (boolean) request.getAttribute("errorPassword");
-                    if (exist) {
-                        out.print("<h4 style='color:red;'> Ошибка! </h4>");
-                    }else {
-                        out.print("<h4 style='color:green;'> Пароль изменен! </h4>");
+                   if (request.getAttribute("pasAndRePas")!=null) {
+                       boolean pasAndRePas = (boolean) request.getAttribute("pasAndRePas");
+                       if (pasAndRePas!=true){
+                           %> <p style="color: red">Пароли не совпадают</p> <%
+                       }
+                   }
+
+                    if (request.getAttribute("curPas")!=null) {
+                        boolean curPas = (boolean) request.getAttribute("curPas");
+                        if (curPas!=true){
+                            %> <p style="color: red">Текущий пароль не верный</p> <%
+                        }
                     }
+
+                if (request.getAttribute("curPas")!=null && request.getAttribute("pasAndRePas")!=null){
+                    boolean pasAndRePas = (boolean) request.getAttribute("pasAndRePas");
+                    boolean curPas = (boolean) request.getAttribute("curPas");
+                    if (pasAndRePas && curPas){
+                         %> <p style="color: green">Пароль изменен</p> <%
                     }
-                %>
-                <p>Текущий пароль: </p> <input class="form-control set-size" type="password" name="currentPassword">
+                }
+
+            %>
                 <input type="hidden" name="idUser" value="<% out.print(x.getId()); %>">
-                <p>Новый пароль: </p> <input class="form-control set-size" type="password" name="newPassword">
-                <input type="hidden" name="idUser" value="<% out.print(x.getId()); %>">
-                <p>Повторите пароль: </p> <input class="form-control set-size" type="password" name="reNewPassword">
-                <input type="hidden" name="idUser" value="<% out.print(x.getId()); %>">
+                <input class="form-control set-size my-2" type="password" name="currentPassword"
+                       placeholder="Текущий пароль">
+                <input class="form-control set-size my-2" type="password" name="newPassword" placeholder="Новый пароль">
+                <input class="form-control set-size my-2" type="password" name="reNewPassword"
+                       placeholder="Повторите пароль">
                 <br>
                 <button type="submit" class="btn btn-primary">Сохранить</button>
-                <a href="mygoods"><button type="button" class="btn btn-danger">Отмена</button></a>
+                <a href="mygoods">
+                    <button type="button" class="btn btn-danger">Отмена</button>
+                </a>
             </form>
             <%
-            }
-            else {
-            out.print("Зарегистрируйтесь");
-            }
+            } else {
+            %>
+            <p><a href="registration.jsp">Зарегистрируйтесь</a></p>
+            <%
+                }
             %>
         </div>
     </div>

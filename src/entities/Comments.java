@@ -4,6 +4,7 @@ public class Comments {
 
     private Long id;
     private Long id_goods;
+    private Long id_user;
     private String title;
     private String content;
     private String postDate;
@@ -11,9 +12,10 @@ public class Comments {
     private String userName;
     private String userSurname;
 
-    public Comments(Long id, Long id_goods, String title, String content, String postDate, String postTime, String userName, String userSurname) {
+    public Comments(Long id, Long id_goods, Long id_user, String title, String content, String postDate, String postTime, String userName, String userSurname) {
         this.id = id;
         this.id_goods = id_goods;
+        this.id_user = id_user;
         this.title = title;
         this.content = content;
         this.postDate = postDate;
@@ -36,6 +38,14 @@ public class Comments {
 
     public void setId_goods(Long id_goods) {
         this.id_goods = id_goods;
+    }
+
+    public Long getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(Long id_user) {
+        this.id_user = id_user;
     }
 
     public String getTitle() {

@@ -17,20 +17,6 @@
 <div class="container">
     <div class="row">
         <div class="col-12" align="center">
-            <h1>Барахолка</h1>
-            <hr>
-            <h2 align="center">Admin Panel</h2>
-            <a href="mygoods">Мой список товаров!</a>
-            <%
-                if (null != request.getSession().getAttribute("login")) {
-                    Users x = (Users) request.getSession().getAttribute("login");
-                    out.print("<h4>" + "Welcome: " + x.getName() + " " + x.getSurname());
-                    out.print("");
-                } else {
-                    out.print("<h4> Welcome Anonum <a href=\"login.jsp\">Login</a></h4>");
-                    out.print("");
-                }
-            %>
             <table align="center" class="table table-hover">
                 <tr>
                     <th>id</th>

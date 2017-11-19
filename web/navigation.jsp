@@ -8,9 +8,15 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
             <ul class="navbar-nav ml-auto">
+
+
+
+
                 <%
+
                     if (request.getSession().getAttribute("login") == null) {
                 %>
+
                 <li class="nav-item active">
                     <a class="nav-link text-warning" href="loginuser">Новое объявление
                         <span class="sr-only">(current)</span>

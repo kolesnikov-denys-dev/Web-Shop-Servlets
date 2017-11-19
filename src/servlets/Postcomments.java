@@ -33,6 +33,12 @@ public class Postcomments extends HttpServlet {
         Date date = new Date();
         SimpleDateFormat dateFormat = null;
 
+
+        Long id_user = Long.valueOf(u.getId());
+
+        System.out.println(id_user + "------------------HERE ID USER>>>>");
+
+
         dateFormat = new SimpleDateFormat("HH:mm:ss");
         String currentTimeS = dateFormat.format(date);
         dateFormat = new SimpleDateFormat("dd MMMM y");
@@ -45,9 +51,8 @@ public class Postcomments extends HttpServlet {
         System.out.println(currentTimeS);
         System.out.println(u.getName());
 
-        dbUtil.addNewComment(new Comments(null, idGoods, title, content, currentDateS, currentTimeS, u.getName(), u.getSurname()));
+        dbUtil.addNewComment(new Comments(null, idGoods,  id_user, title, content, currentDateS, currentTimeS, u.getName(), u.getSurname()));
 
         request.getRequestDispatcher("opengoods").forward(request,response);
     }
-
 }

@@ -31,6 +31,7 @@ public class OpenGoods extends HttpServlet {
 
         ArrayList<Comments> commentsList = dbUtil.commentsList(idGoods);
         request.setAttribute("commentsList", commentsList);
+
         request.getRequestDispatcher("/single-goods.jsp").forward(request, response);
 
     }
