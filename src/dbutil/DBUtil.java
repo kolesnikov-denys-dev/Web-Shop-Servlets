@@ -215,6 +215,7 @@ public class DBUtil {
             Statement statement = connection.createStatement();
             String queryAll = null;
 //            Test
+//            dsfdsf
             boolean x = category.equals("0");
             if (search != null && x != true) {
                 queryAll = "SELECT * FROM goods WHERE published='1' AND category=\"" + category + "\" AND \n" +
