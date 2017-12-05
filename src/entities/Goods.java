@@ -1,7 +1,7 @@
 package entities;
 
-public class Goods {
 
+public class Goods {
     private int id;
     private int id_user;
     private int published;
