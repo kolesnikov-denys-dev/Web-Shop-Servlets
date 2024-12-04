@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Blog Post - Start Bootstrap Template</title>
+    <title>My Goods</title>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/blog-post.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -22,7 +22,7 @@
         <div class="col-lg-8 offset-2">
             <div class="form-inline">
                 <div class="col-lg-6">
-                    <h1 class="mt-4">Мои товары</h1>
+                    <h1 class="mt-4">My Goods</h1>
                 </div>
             </div>
             <hr>
@@ -32,24 +32,23 @@
             %>
             <h3><% out.print(g.getTitle()); %></h3>
             <% if (g.getPublished() == 1) {
-                out.print("<p class=\"published\">Объявление: опубликовано</p>");
+                out.print("<p class=\"published\">Listing: Published</p>");
             } else {
-                out.print("<p class=\"no-published\">Объявление: не опубликовано</p>");
+                out.print("<p class=\"no-published\">Listing: Not Published</p>");
             }
             %>
-            <p>Рубрика:
+            <p>Category:
                 <%
-                    String rybrika[] = {"Не определена", "Детский мир", "Недвижимость", "Транспорт", "Запчасти для транспорта", "Работа", "Животные", "Дом и сад", "Электроника", "Бизнес и услуги", "Мода и стиль", "Хобби, отдых и спорт"};
-                    out.print(rybrika[g.getCategory()]);
+                    String categories[] = {"Undefined", "Kids' World", "Real Estate", "Transportation", "Auto Parts", "Jobs", "Pets", "Home and Garden", "Electronics", "Business and Services", "Fashion and Style", "Hobbies, Leisure, and Sports"};
+                    out.print(categories[g.getCategory()]);
                 %>
             </p>
-            <%--<p>Автор: <% out.print(u.getName());%>  <% %></p>--%>
-            <p>Номер товара # <% out.print(g.getId()); %></p>
-            <p class="viewCoutMain">Количество просмотров: <% out.print(g.getView_count()); %></p>
-            <p>Дата создания: <% out.print(g.getDate()); %> <% out.print(g.getTime()); %></p>
-            <p>Стоимость: <% out.print(g.getPrice()); %></p>
-            <p>Описание товара: <% out.print(g.getDescription()); %></p>
-            <p>Фотография: <% out.print(g.getPhoto()); %></p>
+            <p>Item Number # <% out.print(g.getId()); %></p>
+            <p class="viewCoutMain">View Count: <% out.print(g.getView_count()); %></p>
+            <p>Date Created: <% out.print(g.getDate()); %> <% out.print(g.getTime()); %></p>
+            <p>Price: <% out.print(g.getPrice()); %></p>
+            <p>Item Description: <% out.print(g.getDescription()); %></p>
+            <p>Photo: <% out.print(g.getPhoto()); %></p>
             <%
                 Users u = (Users) request.getSession().getAttribute("login");
                 if (u != null) {
@@ -58,11 +57,11 @@
             <div class="form-inline">
                 <form action="editgoods" method="post">
                     <input type="hidden" value="<% out.print(g.getId()); %>" name="idgoods">
-                    <button type="submit" class="btn btn-primary editBtn" name="edit">Редактировать</button>
+                    <button type="submit" class="btn btn-primary editBtn" name="edit">Edit</button>
                 </form>
                 <form action="deletegoods" method="post">
                     <input type="hidden" value="<% out.print(g.getId()); %>" name="idgoods">
-                    <button type="submit" class="btn btn-danger " name="delete">Удалить</button>
+                    <button type="submit" class="btn btn-danger " name="delete">Delete</button>
                 </form>
             </div>
             <%
@@ -72,7 +71,7 @@
             <hr>
             <%
                 } else {
-                    out.print("<p> Нет товаров !</p> ");
+                    out.print("<p>No goods available!</p>");
                 }
             %>
             <%
@@ -80,8 +79,8 @@
                     ArrayList<Comments> list = (ArrayList<Comments>) request.getAttribute("commentsList");
 
             %>
-            <h5>Коментарии </h5>
-            <h6> Количество комментариев: <% out.print(list.size()); %></h6>
+            <h5>Comments</h5>
+            <h6>Number of Comments: <% out.print(list.size()); %></h6>
             <hr>
             <%
                 for (Comments c : list) {
@@ -91,7 +90,7 @@
                     <img src="img/anonym.gif" alt="avatar" style="width: 50px; height: 50px; border-radius: 100%;">
                 </div>
                 <div class="col-lg-5 m-0 ">
-                    <span>Пользователь: </span>
+                    <span>User: </span>
                     <p class="m-0"><% out.print(c.getUserName()); %> <% out.print(c.getUserSurname()); %></p>
                 </div>
                 <div class="col-lg-3 m-0 ">
@@ -106,39 +105,31 @@
             <hr>
             <% if (request.getSession().getAttribute("login") != null) {
                 Users u = (Users) request.getSession().getAttribute("login");
-                System.out.println(c.getId_user());
-                System.out.println(u.getId());
-                if (u != null) {
-                    if (c.getId_user() == u.getId()) {
+                if (u != null && c.getId_user() == u.getId()) {
             %>
             <form action="deletecomments" method="get">
                 <input type="hidden" name="idComment" value="<% out.print(c.getId());%>">
                 <input type="hidden" name="idPost" value="<% out.print(g.getId());%>">
-                <button type="submit" class="btn btn-danger " name="delete">Удалить</button>
+                <button type="submit" class="btn btn-danger " name="delete">Delete</button>
             </form>
             <%
-                                }
                             }
                         }
                     }
-
                 }
-
             %>
-
             <form action="postcomments" method="get">
                 <div class="row">
                     <div class="col-md-12">
                         <input type="hidden" value="<% out.print(g.getId()); %>" name="currentId">
-                        <input type="text" class="form-control input-lg" name="title"
-                               placeholder="Заголовок комментария">
+                        <input type="text" class="form-control input-lg" name="title" placeholder="Comment Title">
                     </div>
                     <div class="col-md-12">
-                                        <textarea class="form-control" rows="7" cols="30" id="message-text"
-                                                  name="content" placeholder="Комментарий..."></textarea>
+                        <textarea class="form-control" rows="7" cols="30" id="message-text"
+                                  name="content" placeholder="Comment..."></textarea>
                     </div>
                 </div>
-                <button type="submit" class="btn btn-primary" name="delete">Коментировать</button>
+                <button type="submit" class="btn btn-primary" name="post">Post Comment</button>
             </form>
         </div>
         <hr>

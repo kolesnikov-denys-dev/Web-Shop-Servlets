@@ -1,7 +1,6 @@
 package entities;
 
 public class Comments {
-
     private Long id;
     private Long id_goods;
     private Long id_user;

@@ -14,7 +14,6 @@ import java.util.ArrayList;
 
 @WebServlet("/opengoods")
 public class OpenGoods extends HttpServlet {
-
     DBUtil dbUtil;
 
     public OpenGoods() {
@@ -23,17 +22,11 @@ public class OpenGoods extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         String idGoods = request.getParameter("currentId");
-
         Goods g = dbUtil.showGoodsById(idGoods);
         request.setAttribute("currentGoodsId", g);
-
         ArrayList<Comments> commentsList = dbUtil.commentsList(idGoods);
         request.setAttribute("commentsList", commentsList);
-
         request.getRequestDispatcher("/single-goods.jsp").forward(request, response);
-
     }
-
 }

@@ -1,6 +1,5 @@
 package filter;
 
-import com.sun.deploy.net.HttpRequest;
 import dbutil.DBUtil;
 import entities.Users;
 

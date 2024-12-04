@@ -31,6 +31,5 @@ public class Login extends HttpServlet {
         }
     }
 }
-
 //            HttpSession session = request.getSession();   //long way
 //            session.setAttribute("login", checkedUser);

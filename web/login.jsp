@@ -16,16 +16,16 @@
     <div class="row">
         <div class="col-12">
             <div align="center">
-                <h1>Барахолка</h1>
+                <h1>Web Shop</h1>
                 <hr>
-                <h2 align="center">Вход</h2>
+                <h2 align="center">Login</h2>
                 <form action="loginuser" method="get">
-                    <input class="form-control set-size m-2" type="email" name="email" placeholder="Емейл" autofocus>
+                    <input class="form-control set-size m-2" type="email" name="email" placeholder="Email" autofocus>
 
-                    <input class="form-control set-size m-2" type="password" name="password" placeholder="Пароль">
-                    <button type="submit" class="btn btn-success">Вход</button>
+                    <input class="form-control set-size m-2" type="password" name="password" placeholder="Password">
+                    <button type="submit" class="btn btn-success">Login</button>
                     <a href="/registration.jsp">
-                        <button type="button" class="btn btn-primary">Регистрация</button>
+                        <button type="button" class="btn btn-primary">Register</button>
                     </a>
                 </form>
             </div>
@@ -37,24 +37,3 @@
 <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

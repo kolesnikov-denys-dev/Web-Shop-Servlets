@@ -23,7 +23,6 @@ public class Postcomments extends HttpServlet {
     }
 
     protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         request.setCharacterEncoding("UTF8");
         String title = request.getParameter("title");
         String content = request.getParameter("content");
@@ -33,11 +32,8 @@ public class Postcomments extends HttpServlet {
         Date date = new Date();
         SimpleDateFormat dateFormat = null;
 
-
         Long id_user = Long.valueOf(u.getId());
-
         System.out.println(id_user + "------------------HERE ID USER>>>>");
-
 
         dateFormat = new SimpleDateFormat("HH:mm:ss");
         String currentTimeS = dateFormat.format(date);

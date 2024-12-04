@@ -24,7 +24,6 @@ public class AddNewGoods extends HttpServlet {
     }
 
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
         if (request.getSession() != null && request.getSession().getAttribute("login") != null) {
 
             request.setCharacterEncoding("UTF8");
@@ -62,5 +61,4 @@ public class AddNewGoods extends HttpServlet {
             response.sendRedirect("/login.jsp");
         }
     }
-
 }

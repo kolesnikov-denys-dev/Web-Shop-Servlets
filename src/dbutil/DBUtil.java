@@ -8,18 +8,25 @@ import java.sql.*;
 import java.text.DateFormatSymbols;
 import java.util.ArrayList;
 
-import static java.lang.Integer.parseInt;
-import static java.lang.Integer.valueOf;
-
 public class DBUtil {
     private Connection connection;
 
     public DBUtil() {
         try {
-            Class.forName("com.mysql.jdbc.Driver");
-            connection = DriverManager.getConnection("jdbc:mysql://localhost:3306/myjdbc", "root", "1234");
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(
+                    "jdbc:mysql://localhost:3306/myjdbc?useSSL=false&serverTimezone=UTC&allowPublicKeyRetrieval=true",
+                    "root",
+                    "1234java"
+            );
+            if (connection != null) {
+                System.out.println("Успешное подключение к базе данных.");
+            } else {
+                System.err.println("Не удалось подключиться к базе данных.");
+            }
         } catch (Exception e) {
             e.printStackTrace();
+            System.err.println("Ошибка подключения: " + e.getMessage());
         }
     }
 
@@ -30,7 +37,9 @@ public class DBUtil {
                     "VALUES (\"" + email + "\",\"" + password + "\",\"" + name + "\",\"" + surname + "\"," + age + ")");
             st.close();
         } catch (Exception e) {
+            System.err.println("Ошибка подключения к базе данных: " + e.getMessage());
             e.printStackTrace();
+
         }
     }
 
@@ -267,7 +276,7 @@ public class DBUtil {
 
             if (result.next()) {
                 int pass = result.getInt("password");
-                if (password==pass) {
+                if (password == pass) {
                     x = true;
                 } else {
                     x = false;
@@ -409,7 +418,5 @@ public class DBUtil {
             return new String[]{"января", "февраля", "марта", "апреля", "мая", "июня",
                     "июля", "августа", "сентября", "октября", "ноября", "декабря"};
         }
-
     };
-
 }

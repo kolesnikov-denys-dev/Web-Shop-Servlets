@@ -40,7 +40,6 @@ public class Goods {
         this.category = category;
     }
 
-
     public int getId() {
         return id;
     }

@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <meta name="description" content="">
     <meta name="author" content="">
-    <title>Товары</title>
+    <title>Goods</title>
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="css/blog-post.css" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
@@ -23,31 +23,31 @@
         <div class="col-lg-2 col-sm-0">
         </div>
         <div class="col-lg-8 col-sm-12">
-            <h1 class="mt-4">Все товары</h1>
+            <h1 class="mt-4">All Goods</h1>
             <form action="allgoods" method="get">
                 <div class="form-group search-form">
                     <div class="row">
                         <div class="col-lg-4 col-sm-6 p-sm-2">
-                            <input class="form-control" type="search" name="search" value="" placeholder="Поиск">
+                            <input class="form-control" type="search" name="search" value="" placeholder="Search">
                         </div>
                         <div class="col-lg-4 col-sm-6 p-sm-2">
                             <select class="form-control" name="category">
-                                <option value="0">Все товары</option>
-                                <option value="1">Детский мир</option>
-                                <option value="2">Недвижимость</option>
-                                <option value="3">Транспорт</option>
-                                <option value="4">Запчасти для транспорта</option>
-                                <option value="5">Работа</option>
-                                <option value="6">Животные</option>
-                                <option value="7">Дом и сад</option>
-                                <option value="8">Электроника</option>
-                                <option value="9">Бизнес и услуги</option>
-                                <option value="10">Мода и стиль</option>
-                                <option value="11">Хобби, отдых и спорт</option>
+                                <option value="0">All Goods</option>
+                                <option value="1">Kids' World</option>
+                                <option value="2">Real Estate</option>
+                                <option value="3">Transportation</option>
+                                <option value="4">Auto Parts</option>
+                                <option value="5">Jobs</option>
+                                <option value="6">Pets</option>
+                                <option value="7">Home and Garden</option>
+                                <option value="8">Electronics</option>
+                                <option value="9">Business and Services</option>
+                                <option value="10">Fashion and Style</option>
+                                <option value="11">Hobbies, Leisure, and Sports</option>
                             </select>
                         </div>
                         <div class="col-lg-4 col-sm-12 p-sm-2">
-                            <button type="submit" class="btn btn-primary">Показать товары</button>
+                            <button type="submit" class="btn btn-primary">Show Goods</button>
                         </div>
                     </div>
                 </div>
@@ -56,14 +56,14 @@
             <%
                 ArrayList<Goods> MyListGoods = (ArrayList<Goods>) request.getAttribute("AllGo");
             %>
-            <p>Найдено объявления по вашему запросу: <% out.print(MyListGoods.size());%></p>
+            <p>Number of listings found: <% out.print(MyListGoods.size());%></p>
             <%
                 if (MyListGoods != null && MyListGoods.size() > 0) {
                     for (Goods g : MyListGoods) {
             %>
             <div class="row">
                 <div class="col-lg-2">
-                    <a href="/opengoods?currentId=<% out.print(g.getId()); %>" class="btn btn-warning">Подробнее</a>
+                    <a href="/opengoods?currentId=<% out.print(g.getId()); %>" class="btn btn-warning">Details</a>
                 </div>
                 <div class="col-lg-7">
                     <h3><% out.print(g.getTitle()); %></h3>
@@ -71,24 +71,24 @@
             </div>
 
             <% if (g.getPublished() == 1) {
-                out.print("<p class=\"published\">Объявление: опубликовано</p>");
+                out.print("<p class=\"published\">Listing: Published</p>");
             } else {
-                out.print("<p class=\"no-published\">Объявление: не опубликовано</p>");
+                out.print("<p class=\"no-published\">Listing: Not Published</p>");
             }
             %>
-            <p>Рубрика:
+            <p>Category:
                 <%
-                    String rybrika[] = {"Не определена", "Детский мир", "Недвижимость", "Транспорт", "Запчасти для транспорта", "Работа", "Животные", "Дом и сад", "Электроника", "Бизнес и услуги", "Мода и стиль", "Хобби, отдых и спорт"};
-                    out.print(rybrika[g.getCategory()]);
+                    String categories[] = {"Undefined", "Kids' World", "Real Estate", "Transportation", "Auto Parts", "Jobs", "Pets", "Home and Garden", "Electronics", "Business and Services", "Fashion and Style", "Hobbies, Leisure, and Sports"};
+                    out.print(categories[g.getCategory()]);
                 %>
             </p>
-            <%--<p>Автор: <% out.print(u.getName());%>  <% %></p>--%>
-            <p>Номер товара # <% out.print(g.getId()); %></p>
-            <p class="viewCoutMain">Количество просмотров: <% out.print(g.getView_count()); %></p>
-            <p>Дата создания: <% out.print(g.getDate()); %> <% out.print(g.getTime()); %></p>
-            <p>Стоимость: <% out.print(g.getPrice()); %></p>
-            <p>Описание товара: <% out.print(g.getDescription()); %></p>
-            <p>Фотография: <% out.print(g.getPhoto()); %></p>
+            <%--<p>Author: <% out.print(u.getName());%>  <% %></p>--%>
+            <p>Item ID # <% out.print(g.getId()); %></p>
+            <p class="viewCoutMain">View Count: <% out.print(g.getView_count()); %></p>
+            <p>Date Created: <% out.print(g.getDate()); %> <% out.print(g.getTime()); %></p>
+            <p>Price: <% out.print(g.getPrice()); %></p>
+            <p>Description: <% out.print(g.getDescription()); %></p>
+            <p>Photo: <% out.print(g.getPhoto()); %></p>
             <%
                 if (u != null) {
                     if (u.getId() == g.getId_user()) {
@@ -96,11 +96,11 @@
             <div class="form-inline">
                 <form action="editgoods" method="post">
                     <input type="hidden" value="<% out.print(g.getId()); %>" name="idgoods">
-                    <button type="submit" class="btn btn-primary editBtn" name="edit">Редактировать</button>
+                    <button type="submit" class="btn btn-primary editBtn" name="edit">Edit</button>
                 </form>
                 <form action="deletegoods" method="post">
                     <input type="hidden" value="<% out.print(g.getId()); %>" name="idgoods">
-                    <button type="submit" class="btn btn-danger " name="delete">Удалить</button>
+                    <button type="submit" class="btn btn-danger " name="delete">Delete</button>
                 </form>
             </div>
             <%
@@ -111,7 +111,7 @@
             <%
                     }
                 } else {
-                    out.print("<p> Нет товаров !</p> ");
+                    out.print("<p>No goods available!</p>");
                 }
             %>
         </div>

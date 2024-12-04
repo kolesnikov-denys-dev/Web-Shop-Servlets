@@ -16,47 +16,45 @@
 <div class="container">
     <div class="row">
         <div class="col-lg-8 offset-2">
-            <h1 class="mt-4">Редактировать объявление</h1>
+            <h1 class="mt-4">Edit Listing</h1>
             <hr>
             <%
                 Goods yourGoods = (Goods) request.getAttribute("yourGoods");
             %>
             <form action="edit-goods" method="post">
-                <p>Дата публикации: <% out.print(yourGoods.getTime()); %>
+                <p>Publication Date: <% out.print(yourGoods.getTime()); %>
                     <% out.print(yourGoods.getDate()); %></p>
-                Статус объявления:
+                Listing Status:
                 <%
                     int status = yourGoods.getPublished();
                     if (status == 1) {
-                        out.print("<p class=\"published\">Опубликовано</p>");
+                        out.print("<p class=\"published\">Published</p>");
                     } else {
-                        out.print("<p class=\"no-published\">Не Опубликовано</p>");
+                        out.print("<p class=\"no-published\">Not Published</p>");
                     }
                 %>
-                <p>Номер товара: <% out.print(yourGoods.getId()); %></p>
-                Заголовок объявления: <input class="form-control input-lg" type="text" name="email"
-                                             value="<% out.print(yourGoods.getTitle()); %>">
-                Цена: <input rows="6" class="form-control" type="text" name="email"
-                             value="<% out.print(yourGoods.getPrice()); %>">
-                Описание товара:<textarea style="width: 90%" class="form-control" rows="10" cols="60">
+                <p>Item Number: <% out.print(yourGoods.getId()); %></p>
+                Listing Title: <input class="form-control input-lg" type="text" name="title"
+                                      value="<% out.print(yourGoods.getTitle()); %>">
+                Price: <input rows="6" class="form-control" type="text" name="price"
+                              value="<% out.print(yourGoods.getPrice()); %>">
+                Item Description:<textarea style="width: 90%" class="form-control" rows="10" cols="60">
                 <% out.print(yourGoods.getDescription()); %></textarea>
-                <input class="form-control" type="text" name="email" value="">
-                Фотография: <input class="form-control" type="text" name="email"
-                                   value="<% out.print(yourGoods.getPhoto()); %>">
-                <input class="form-control" type="text" name="email"
+                <input class="form-control" type="text" name="description" value="">
+                Photo: <input class="form-control" type="text" name="photo"
+                              value="<% out.print(yourGoods.getPhoto()); %>">
+                <input class="form-control" type="text" name="view_count"
                        value="<% out.print(yourGoods.getView_count()); %>">
             </form>
             <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Сохранить и
-                опубликовать
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio1" value="option1"> Save and Publish
             </label>
             <label class="radio-inline">
-                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Сохранить без
-                публикации
+                <input type="radio" name="inlineRadioOptions" id="inlineRadio2" value="option2"> Save Without Publishing
             </label>
             <br>
-            <button type="submit" class="btn btn-success ">Готово</button>
-            <button type="submit" class="btn btn-danger" href="mygoods">Отмена</button>
+            <button type="submit" class="btn btn-success">Done</button>
+            <button type="submit" class="btn btn-danger" href="mygoods">Cancel</button>
             <hr>
         </div>
     </div>
